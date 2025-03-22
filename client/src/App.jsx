@@ -14,7 +14,7 @@ import SearchResult from './pages/SearchResult.jsx'
 import AdminDetails from './pages/AdminDetails.jsx'
 import UsersDetail from './pages/UsersDetail.jsx'
 import PricingPage from './pages/PricingPage.jsx'
-import PriceRequest from './pages/priceRequest.jsx'
+import PriceRequest from './pages/PriceRequest.jsx'
 import EducationPage from './pages/EducationPage.jsx'
 import Header from './components/Header.jsx'
 
