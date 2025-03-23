@@ -195,7 +195,7 @@ const SearchResult = () => {
                 <div className="flex flex-col max-w-4xl mx-auto gap-4 mt-4">
                     <p className="text-2xl text-center text-slate-700 font-bold"><u>Search Result</u> </p>
                     {listings && listings.length > 0 ? listings.map((shop, idx) => (
-                        !shop.isExpired && <ShopBox listing={shop} distance={distance && distance.length > 0 ? distance[idx].distance : "distance- "} key={idx} />
+                        !shop.isExpired ? <ShopBox listing={shop} distance={distance && distance.length > 0 ? distance[idx].distance : "distance- "} key={idx} /> : null
                     )) : <p>No results found</p>}
                 </div>
 
