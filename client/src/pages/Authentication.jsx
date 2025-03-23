@@ -29,7 +29,7 @@ export default function Authentication() {
 
     if (mobNum.length === 10) {
       try {
-        await axios.post("http://localhost:5000/api/user/verify_phone", { mobileNum: mobNum }).then(async (response) => {
+        await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/verify_phone`, { mobileNum: mobNum }).then(async (response) => {
           setFlag(true);
           setUserId(response.data._id);
           setSendOTP(response.data.otp);
@@ -60,7 +60,7 @@ export default function Authentication() {
     if (otp.length === 5) {
       setLoading(true);
       try {
-        await axios.post("http://localhost:5000/api/user/verify_otp", { _id: userId, otp: otp }).then(async (response) => {
+        await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/verify_otp`, { _id: userId, otp: otp }).then(async (response) => {
           if (response.data) {
             if (response.data.username !== "") {
               // console.log(response.data)
@@ -93,12 +93,12 @@ export default function Authentication() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/user/username", { _id: userId, username: username }).then(async (response) => {
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/username`, { _id: userId, username: username }).then(async (response) => {
         if (response.data) {
           dispatchEvent(signInSuccess(response.data))
 
           return navigate("/");
-          // await axios.post("http://localhost:5000/api/allshop/create-shops", { userRef: userId }).then(async (response) => {
+          // await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/allshop/create-shops`, { userRef: userId }).then(async (response) => {
           //   if (response.data) {
           //     // return navigate("/");
           //   }

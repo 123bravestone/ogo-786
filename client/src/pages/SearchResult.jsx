@@ -91,7 +91,7 @@ const SearchResult = () => {
                 const searchQuery = urlParams.toString();
                 if (searchQuery) {
                     // console.log("work", searchQuery);
-                    await axios.get(`http://localhost:5000/api/listing/get?${searchQuery}`).then(async (res) => {
+                    await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?${searchQuery}`).then(async (res) => {
                         if (res.data) {
                             // console.log(res.data);
                             setListings(res.data);
@@ -152,7 +152,7 @@ const SearchResult = () => {
         urlParams.set('startIndex', startIndex);
         const searchQuery = urlParams.toString();
         try {
-            await axios.get(`http://localhost:5000/api/listings/get?${searchQuery}`).then(async (res) => {
+            await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/get?${searchQuery}`).then(async (res) => {
                 if (res.data) {
                     setListings([...listings, ...res.data]);
                     if (res.data.length > 8) {

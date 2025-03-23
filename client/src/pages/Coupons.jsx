@@ -49,7 +49,7 @@ const Coupons = () => {
   //     if (shops.length > 0) {
 
   //       // console.log("work", lenShop)
-  //       await axios.post('http://localhost:5000/api/allshop/add-shops-code', { allShop: shops, userRef: currentUser._id }).then(async (res) => {
+  //       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/allshop/add-shops-code`, { allShop: shops, userRef: currentUser._id }).then(async (res) => {
   //         if (res.data) {
   //           // console.log(res.data)
   //           dispatchEvent(userCodeSet(res.data))
@@ -68,7 +68,7 @@ const Coupons = () => {
   //   const fetchData = async () => {
 
   //     // console.log("working", shops.length, lenShop, arrShop.length)
-  //     await axios.get(`http://localhost:5000/api/allshop/get-shops-code/${currentUser._id}`).then(async (res) => {
+  //     await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/allshop/get-shops-code/${currentUser._id}`).then(async (res) => {
   //       if (res.data.length > 0 && res.data.length === arrShop.length) {
   //         dispatchEvent(userCodeSet(res.data))
   //         // console.log("work", lenShop)

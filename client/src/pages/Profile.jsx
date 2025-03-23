@@ -38,7 +38,7 @@ const Profile = () => {
     setLoading(true);
     try {
 
-      await axios.post(`http://localhost:5000/api/user/update/${currentUser._id}`,
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/update/${currentUser._id}`,
         formData
       ).then(async (response) => {
         if (response.data) {
@@ -64,7 +64,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
 
-      await axios.post("http://localhost:5000/api/user/log-out", {
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/log-out`, {
         _id: currentUser._id
       }).then(async (res) => {
         if (res.data) {
@@ -90,7 +90,7 @@ const Profile = () => {
   const handleShowListing = async () => {
     try {
 
-      await axios.get(`http://localhost:5000/api/user/list-items/${currentUser._id}`).then(async (res) => {
+      await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/list-items/${currentUser._id}`).then(async (res) => {
         if (res.data) {
           setUserListing(res.data);
           setShowListingError(false);
@@ -109,7 +109,7 @@ const Profile = () => {
   const handleListingDelete = async (listindId) => {
     try {
       setDeletElement(true)
-      await axios.post(`http://localhost:5000/api/listing/delete-list-item/${listindId}`, { _id: currentUser._id }).then(async (res) => {
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-list-item/${listindId}`, { _id: currentUser._id }).then(async (res) => {
         if (res.data) {
           setDeletElement(false)
           setUserListing((prev) =>

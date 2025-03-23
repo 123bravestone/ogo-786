@@ -71,7 +71,7 @@ export default function UpdateListing() {
         const fetchListing = async () => {
             const listingId = params.listingId;
 
-            await axios.get(`http://localhost:5000/api/listing/get-listing/${listingId}`).then(async (res) => {
+            await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get-listing/${listingId}`).then(async (res) => {
                 if (res.data) {
                     setFormData(res.data);
                 }
@@ -197,7 +197,7 @@ export default function UpdateListing() {
             setError(false);
             setFlag(false)
 
-            await axios.post(`http://localhost:5000/api/listing/update-listing/${params.listingId}`, { ...formData, userRef: currentUser._id }).then(async (res) => {
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/update-listing/${params.listingId}`, { ...formData, userRef: currentUser._id }).then(async (res) => {
                 if (res.data) {
                     navigate(`/listing/${res.data._id}`)
                 }

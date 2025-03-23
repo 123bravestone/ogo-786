@@ -7,6 +7,7 @@ const initialState = {
   lenShop: 0,
   userCode: [],
   imagePath: null,
+  userLocation: null
 };
 
 const userSlice = createSlice({
@@ -15,6 +16,9 @@ const userSlice = createSlice({
   reducers: {
     userCodeSet: (state, action) => {
       state.userCode = action.payload
+    },
+    userLocationSet: (state, action) => {
+      state.userLocation = action.payload
     },
     imagePathSet: (state, action) => {
       state.imagePath = action.payload
@@ -76,6 +80,7 @@ const userSlice = createSlice({
 
 export const {
   userCodeSet,
+  userLocationSet,
   imagePathSet,
   lengthShop,
   signInStart,

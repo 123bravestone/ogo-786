@@ -62,7 +62,7 @@ export default function Listing() {
 
       // console.log("remainingDays", daysLeft);
       if (listing.isExpired === false && daysLeft <= 0) {
-        await axios.get(`http://localhost:5000/api/listing/expire-listing/${listing._id}`)
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/expire-listing/${listing._id}`)
       }
       // console.log("remainingDays1");
     } catch (error) {
@@ -74,14 +74,16 @@ export default function Listing() {
 
   useEffect(() => {
 
+    // console.log("wirkjlkdajfsl");
     const fetchListing = async () => {
       try {
 
         setLoading(true);
-        await axios.get(`http://localhost:5000/api/listing/get-listing/${params.listingId}`).then(async (res) => {
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get-listing/${params.listingId}`).then(async (res) => {
           if (res.data) {
             setListing(res.data);
             // console.log(res.data.userRef === currentUser._id);
+            // console.log(res.data);
             if (currentUser._id === res.data.userRef) {
               fetchExpiredDate(res.data);
             }
@@ -91,16 +93,6 @@ export default function Listing() {
             return;
           }
         })
-        // const res = await fetch(`/api/listing/get/${params.listingId}`);
-        // const data = await res.json();
-
-        // if (data.success === false) {
-        //   setError(true);
-        //   setLoading(false);
-        //   return;
-        // }
-        // setListing(data);
-        // setLoading(false);
         setLoading(false);
 
         setError(false);
@@ -129,7 +121,7 @@ export default function Listing() {
       {/* {loading && <p className='text-center my-7 text-2xl'>Loding...</p> && <p className='text-center my-7 text-2xl'>Something went wrong!</p>} */}
       {loading && <Loader />} {/* Show loader if API is loading */}
 
-      {listing && !error &&
+      {listing &&
         (
           <div>
 
@@ -141,7 +133,7 @@ export default function Listing() {
               ))}
             </Swiper>
 
-            {currentUser._id === listing.userRef && (
+            {currentUser?._id === listing.userRef && (
               listing.isExpired === false && remainingDays !== null ? (
                 <p className="text-white bg-blue-500 font-semibold p-2 text-center ">
                   {remainingMonths > 0
@@ -160,7 +152,7 @@ export default function Listing() {
                   <FaHouseUser size={24} color='blue' />
                   {listing.shopname}
                 </p>
-                {currentUser._id === listing.userRef ? (
+                {currentUser?._id === listing.userRef ? (
                   <div className="flex items-center justify-baseline gap-2">
                     {/* <span className="bg-green-100 text-green-600 font-bold text-sm px-4 py-1 rounded-md">Owner</span> */}
                     <ShopToggle listingId={listing._id} />

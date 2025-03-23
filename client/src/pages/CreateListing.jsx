@@ -163,7 +163,7 @@ export default function CreateListing() {
             setError(false);
             setFlag(false)
 
-            await axios.post('http://localhost:5000/api/listing/create-listing', { ...formData, userRef: currentUser._id }).then(async (res) => {
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/create-listing`, { ...formData, userRef: currentUser._id }).then(async (res) => {
                 if (res.data) {
                     navigate(`/listing/${res.data._id}`)
                     // console.log("working")

@@ -56,7 +56,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
         });
 
         try {
-            const response = await axios.post("http://localhost:5000/api/listing/upload", imagesData, {
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/upload`, imagesData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
                     const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -91,7 +91,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
     const handleDelete = async (publicId, index) => {
         try {
             setLoading(true)
-            await axios.post("http://localhost:5000/api/listing/delete", { publicId });
+            await axios.post(`${import.meta.env.VITE_APP_API_URL} / api / listing / delete `, { publicId });
             // setUploadedImages((prevImages) => prevImages.filter((img) => img.publicId !== publicId));
             // console.log("deleted", index, publicId);
 
@@ -133,7 +133,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
 
             {uploadProgress > 0 && (
                 <div className="mt-2 w-full bg-gray-200 rounded-md">
-                    <div className="bg-green-500 text-xs text-center text-white p-1 rounded-md" style={{ width: `${uploadProgress}%` }}>
+                    <div className="bg-green-500 text-xs text-center text-white p-1 rounded-md" style={{ width: `${uploadProgress} % ` }}>
                         {uploadProgress}%
                     </div>
                 </div>

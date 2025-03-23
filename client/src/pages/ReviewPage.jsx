@@ -20,7 +20,7 @@ const ReviewPage = () => {
     useEffect(() => {
         const fetchAllReview = async () => {
             try {
-                await axios.get(`http://localhost:5000/api/listing/all-reviews-rates/${params.listingId}`).then((res) => {
+                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/all-reviews-rates/${params.listingId}`).then((res) => {
                     setReviews(res.data.reverse());
                     const userExistingReview = res.data.find((r) => r._id === currentUser._id);
                     if (userExistingReview) setUserReview(userExistingReview);
@@ -39,7 +39,7 @@ const ReviewPage = () => {
         if (userReview) return;
 
         try {
-            const res = await axios.post(`http://localhost:5000/api/listing/review-rate/${params.listingId}`, {
+            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/review-rate/${params.listingId}`, {
                 userId: currentUser._id,
                 userName: currentUser.username,
                 rating,
@@ -59,7 +59,7 @@ const ReviewPage = () => {
     // Delete review
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:5000/api/listing/delete-review/${params.listingId}/${currentUser._id}`).then((res) => {
+            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-review/${params.listingId}/${currentUser._id}`).then((res) => {
                 setReviews(res.data.reverse());
                 setUserReview(null);
             });

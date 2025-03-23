@@ -22,7 +22,7 @@ const ShopToggle = ({ listingId }) => {
     useEffect(() => {
         const fetchIsOpen = async () => {
             try {
-                await axios.get(`http://localhost:5000/api/listing/open-shop/${listingId}`).then(async (response) => {
+                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/open-shop/${listingId}`).then(async (response) => {
                     setIsOpen(response.data.isOpen);
                     if (!response.data.isOpen) {
                         setSelectedReason(response.data.closeReason);
@@ -43,7 +43,7 @@ const ShopToggle = ({ listingId }) => {
     const toggleShop = async () => {
 
         try {
-            await axios.post(`http://localhost:5000/api/listing/open-shop/${listingId}`, { closeReason: selectedReason }).then(async (response) => {
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/open-shop/${listingId}`, { closeReason: selectedReason }).then(async (response) => {
                 setIsOpen(response.data.isOpen);
                 if (!response.data.isOpen) {
                     setSelectedReason(response.data.closeReason);

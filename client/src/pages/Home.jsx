@@ -4,16 +4,12 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import Image1 from '../assets/canvas_Image/1.png'
 import Image2 from '../assets/canvas_Image/2.png'
 import Image3 from '../assets/canvas_Image/3.png'
-// import Image1 from '../assets/slider/Image1.png'
-// import Image2 from '../assets/slider/Image2.png'
-// import Image3 from '../assets/slider/Image3.png'
 import SearchBar from '../components/SearchBar';
 import ShopBox from '../components/Shopbox';
 import axios from 'axios';
 import Loader from '../components/Loader';
 import { FaSearch } from 'react-icons/fa';
-import ShopList from '../components/ShopList';
-import { signInSuccess } from '../app/user/userSlice.js';
+import { signInSuccess, userLocationSet } from '../app/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -35,9 +31,10 @@ const Home = () => {
 
   // const [distance, setDistance] = useState([]);
   const [sortedShops, setSortedShops] = useState([]);
-  const [userLocation, setUserLocation] = useState(null);
+  // const [userLocation, setUserLocation] = useState(null);
+  // const [location, setLocation] = useState(false);
   const [flag, setFlag] = useState(false);
-  const { currentUser } = useSelector(state => state.user);
+  const { currentUser, userLocation } = useSelector(state => state.user);
   const dispatchEvent = useDispatch();
 
 
@@ -50,7 +47,7 @@ const Home = () => {
 
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [offerListings, setOfferListings] = useState([]);
+  // const [offerListings, setOfferListings] = useState([]);
   const [loading, setLoading] = useState(false);
 
 
@@ -81,21 +78,24 @@ const Home = () => {
 
       try {
         setLoading(true);
-        await axios.get('/api/listing/get?offer=true').then(async (res) => {
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?offer=true`).then(async (res) => {
           if (res.data) {
             // setOfferListings(res.data);
             setSortedShops(res.data);
             setLoading(false);
           }
-          await axios.get(`http://localhost:5000/api/user/${currentUser._id}`).then((res) => {
-            if (res.data) {
-              // setOfferListings(res.data);
-              // setSortedShops(res.data);
-              dispatchEvent(signInSuccess(res.data));
-              // console.log("isAdmin", res.data.username);
-              setLoading(false);
-            }
-          })
+          {
+            currentUser &&
+              await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/${currentUser._id}`).then((res) => {
+                if (res.data) {
+                  // setOfferListings(res.data);
+                  // setSortedShops(res.data);
+                  dispatchEvent(signInSuccess(res.data));
+                  // console.log("isAdmin", res.data.username);
+                  setLoading(false);
+                }
+              })
+          }
         });
 
 
@@ -115,11 +115,29 @@ const Home = () => {
   const getUserLocation = () => {
     setLoading(true);
     if ("geolocation" in navigator) {
+
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        setLoading(false);
+        return;
+      }
+
+      // Ask user with an alert before requesting location
+      const userConsent = window.confirm([
+        "Allow access to your location?",
+        "For a better experience, please allow access to your location.",
+      ].join("\n"));
+      if (!userConsent) {
+        dispatchEvent(userLocationSet(null));
+        setLoading(false);
+        return;
+      }
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userLat = position.coords.latitude;
           const userLon = position.coords.longitude;
-          setUserLocation({ lat: userLat, lon: userLon });
+          dispatchEvent(userLocationSet({ lat: userLat, lon: userLon }));
+          // setUserLocation({ lat: userLat, lon: userLon });
           // Calculate the distance
           setFlag(true);
 
@@ -130,7 +148,7 @@ const Home = () => {
           setLoading(false);
           setFlag(false);
           console.error("Error getting location:", error);
-          alert("Please enable location access.");
+          alert("User denied the request for Geolocation.");
         }
       );
     } else {
@@ -142,10 +160,11 @@ const Home = () => {
 
   useEffect(() => {
     if (userLocation === null) {
-
-      getUserLocation();
+      setTimeout(() => {
+        getUserLocation();
+      }, 2000);
     }
-  }, [userLocation === null]);
+  }, []);
   // useEffect(() => {
   //   console.log("userLocation2", userLocation);
   // }, []);
@@ -164,7 +183,7 @@ const Home = () => {
             className="flex w-full h-full transition-transform duration-700 ease-in-out "
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {images.map((img, index) => (
+            {images && images.map((img, index) => (
 
               <div
                 key={index}
@@ -193,8 +212,8 @@ const Home = () => {
           </button>
         </div>
 
-        {sortedShops.length > 0 && (
-          <SearchBar sortedShops={sortedShops} setSortedShops={setSortedShops} getDistance={getDistance} getUserLocation={getUserLocation} userLocation={userLocation} flag={flag} />
+        {sortedShops && sortedShops.length > 0 && (
+          <SearchBar sortedShops={sortedShops} setSortedShops={setSortedShops} getDistance={getDistance} getUserLocation={getUserLocation} flag={flag} />
         )}
       </div>
 
@@ -230,7 +249,7 @@ const Home = () => {
                 <div className="w-[65rem] lg:w-[90rem] flex flex-col gap-4">
                   {
                     sortedShops.map((listing, idx) => (
-                      !listing.isExpired && <ShopBox key={listing._id} listing={listing} userLocation={userLocation} getDistance={getDistance} />
+                      !listing.isExpired && <ShopBox key={idx} listing={listing} getDistance={getDistance} />
                     ))
                   }
                 </div>

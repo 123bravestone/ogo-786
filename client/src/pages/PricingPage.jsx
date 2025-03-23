@@ -62,7 +62,7 @@ const PricingPage = () => {
         // Implement your pricing request logic here
         // console.log("Pricing request submitted", price, planType, planName);
         try {
-            await axios.post("http://localhost:5000/api/main/pricing-request", { userId: currentUser._id, userMobile: currentUser.mobileNum, userName: currentUser.username, pricing, planType, planName }).then(async (res) => {
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/main/pricing-request`, { userId: currentUser._id, userMobile: currentUser.mobileNum, userName: currentUser.username, pricing, planType, planName }).then(async (res) => {
                 if (res.data) {
                     alert(res.data.message)
                     // console.log(res.data)

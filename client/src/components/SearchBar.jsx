@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa"
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { TbCurrentLocation, TbCurrentLocationOff } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 
 const cities = ["Patna", "Delhi", "Lucknow", "Muzaffarpur", "Bhopal"];
@@ -21,7 +22,9 @@ const cities = ["Patna", "Delhi", "Lucknow", "Muzaffarpur", "Bhopal"];
 //     return R * c; // Distance in km
 // };
 
-export default function SearchBar({ sortedShops, setSortedShops, getDistance, userLocation, getUserLocation, flag }) {
+export default function SearchBar({ sortedShops, setSortedShops, getDistance, getUserLocation, flag }) {
+
+
 
 
     // const [userLocation, setUserLocation] = useState(null);
@@ -36,7 +39,7 @@ export default function SearchBar({ sortedShops, setSortedShops, getDistance, us
     const [citySuggestions, setCitySuggestions] = useState(false);
     const [shopSuggestions, setShopSuggestions] = useState(false);
 
-
+    const { userLocation } = useSelector((state) => state.user);
     const handleSearchSubmit = (e) => {
         e.preventDefault();
 
@@ -184,7 +187,7 @@ export default function SearchBar({ sortedShops, setSortedShops, getDistance, us
             <form onSubmit={handleSearchSubmit} className=' flex items-center justify-center gap-4  mx-2 sm:m-0'>
                 <div className=' bg-slate-100 border-2 border-blue-500 px-2 sm:px-3 sm:py-2 py-1 rounded-lg flex items-center'>
                     <div className='flex p-1 items-center cursor-pointer'>
-                        {!flag ? (
+                        {!userLocation ? (
                             <TbCurrentLocationOff size={24} onClick={getUserLocation} />
                         ) : (
                             <TbCurrentLocation size={24} onClick={getUserLocation} color="#04c5eb" />

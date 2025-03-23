@@ -25,7 +25,7 @@ const PriceRequest = () => {
 
     const fetchRequests = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/main/all-requests/${params.userId}`);
+            const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/main/all-requests/${params.userId}`);
             // console.log(res.data)
             setRequests(res.data);
         } catch (err) {
@@ -35,7 +35,7 @@ const PriceRequest = () => {
 
     const approveRequest = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/main/user-request/approve/${id}/${params.userId}`);
+            await axios.put(`${import.meta.env.VITE_APP_API_URL}/api/main/user-request/approve/${id}/${params.userId}`);
             fetchRequests();
         } catch (err) {
             console.error(err);
@@ -44,7 +44,7 @@ const PriceRequest = () => {
 
     const deleteRequest = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/main/user-request/delete/${id}/${params.userId} `);
+            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/main/user-request/delete/${id}/${params.userId} `);
             fetchRequests();
         } catch (err) {
             console.error(err);

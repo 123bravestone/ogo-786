@@ -15,7 +15,7 @@ const UsersDetail = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                await axios.get("http://localhost:5000/api/user/all-users").then((res) => {
+                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/all-users`).then((res) => {
 
                     setUsers(res.data);
                 });

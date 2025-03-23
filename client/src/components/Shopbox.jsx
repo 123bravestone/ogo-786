@@ -1,10 +1,11 @@
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaArrowRightLong, FaLocationDot, FaMapPin, FaShop } from "react-icons/fa6";
 import { BiSolidDiscount } from "react-icons/bi";
 
 import WhatsAppButton from "./whatsappLoc";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // const getDistance = (lat1, lon1, lat2, lon2) => {
 //     const toRad = (value) => (value * Math.PI) / 180;
@@ -19,9 +20,10 @@ import { Link } from "react-router-dom";
 //     return R * c; // Distance in km
 // };
 
-const ShopBox = ({ listing, userLocation, getDistance }) => {
+const ShopBox = ({ listing, getDistance }) => {
 
     const [flag, setFlag] = useState(false);
+    const { userLocation } = useSelector((state) => state.user);
     // const images = [
     //     "https://cdn.pixabay.com/photo/2024/05/02/01/36/landscape-8733466_1280.png",
     //     "https://static.vecteezy.com/system/resources/thumbnails/006/434/818/small/nature-forest-scene-with-rainbow-in-the-sky-free-vector.jpg",
