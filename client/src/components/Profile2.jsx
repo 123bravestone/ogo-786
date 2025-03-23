@@ -35,7 +35,7 @@ const ProfileUser = () => {
         // formData.append("oldPublicId", currentUser.publicId);
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/upload", formData, {
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
 
@@ -64,7 +64,7 @@ const ProfileUser = () => {
             <label className="relative cursor-pointer">
                 <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                 <div
-                    className={`w - 24 h - 24 rounded - full border - 4 ${ borderColor } flex items - center justify - center overflow - hidden transition - all duration - 300`}
+                    className={`w-24 h-24 rounded-full border-4 ${borderColor} flex items-center justify-center overflow-hidden transition-all duration-300`}
                     onClick={() => setBorderColor("border-yellow-500")} // Change border to yellow on click
                 >
                     {currentUser.imageUrl ? (
@@ -79,7 +79,7 @@ const ProfileUser = () => {
             {uploadProgress > 0 && (
                 <div className="w-24 h-1 bg-gray-300 rounded">
 
-                    <div className="h-full bg-green-500 rounded" style={{ width: `${ uploadProgress } % ` }}><span className="text-xs text-green-500">upload{" "}{uploadProgress}%</span></div>
+                    <div className="h-full bg-green-500 rounded" style={{ width: `${uploadProgress}%` }}><span className="text-xs text-green-500">upload{" "}{uploadProgress}%</span></div>
                 </div>
             )}
 
