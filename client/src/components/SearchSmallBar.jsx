@@ -3,6 +3,8 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { TbCurrentLocation, TbCurrentLocationOff } from "react-icons/tb";
+import { userLocationSet } from "../app/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const shopNames = ["Clothing", "Supermarket", "Footware", "Grocery Mart", "Pharmacy", "Book", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories", "Mobile", "Hair Salon", "Others"];
@@ -10,11 +12,13 @@ const shopNames = ["Clothing", "Supermarket", "Footware", "Grocery Mart", "Pharm
 const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) => {
     const [shop, setShop] = useState("");
     const [showResults, setShowResults] = useState(false);
-    const [userLocation, setUserLocation] = useState(null);
+    // const [userLocation, setUserLocation] = useState(null);
     // const [distance, setDistance] = useState([]);
     const [flag, setFlag] = useState(false);
 
     const navigate = useNavigate();
+    const { userLocation } = useSelector((state) => state.user);
+    const dispatchEvent = useDispatch();
 
     // Filter and sort items based on search term
     const filteredItems = shopNames
@@ -51,15 +55,35 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
 
     const getUserLocation = () => {
         setLoading(true);
-        console.log("working1")
+        // console.log("working1")
 
         if ("geolocation" in navigator) {
             // console.log("working2")
+
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by your browser.");
+                setLoading(false);
+                return;
+            }
+
+            // Ask user with an alert before requesting location
+            const userConsent = window.confirm([
+                "Allow access to your location?",
+                "For a better experience, please allow access to your location.",
+            ].join("\n"));
+            if (!userConsent) {
+                dispatchEvent(userLocationSet(null));
+                setLoading(false);
+                return;
+            }
+
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const userLat = position.coords.latitude;
                     const userLon = position.coords.longitude;
-                    setUserLocation({ lat: userLat, lon: userLon });
+                    dispatchEvent(userLocationSet({ lat: userLat, lon: userLon }));
+                    // setUserLocation({ lat: userLat, lon: userLon });
 
                     // Calculate the distance
                     if (listings.length === 0) {
@@ -112,9 +136,11 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
     useEffect(() => {
 
         if (userLocation === null) {
-            getUserLocation();
+            setTimeout(() => {
+                getUserLocation();
+            }, 1000);
         }
-    }, [!userLocation]);
+    }, []);
     // useEffect(() => {
     // }, []);
 
@@ -127,7 +153,7 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
                 <div className=' bg-slate-100 border-2 border-[#04c5eb] px-1 py-1 sm:p-2 rounded-lg flex items-center '>
 
                     <div className='flex p-2 items-center cursor-pointer'>
-                        {!flag ? (
+                        {!userLocation ? (
                             <TbCurrentLocationOff size={24} onClick={getUserLocation} />
                         ) : (
                             <TbCurrentLocation size={24} onClick={getUserLocation} color="#04c5eb" />
