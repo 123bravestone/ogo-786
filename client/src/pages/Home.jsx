@@ -114,24 +114,30 @@ const Home = () => {
 
   const getUserLocation = () => {
     setLoading(true);
+
+
+    // Ask user with an alert before requesting location
+    const userConsent = window.confirm([
+      "Allow access to your location?",
+      "For a better experience, please allow access to your location.",
+    ].join("\n"));
+    if (!userConsent) {
+      dispatchEvent(userLocationSet(null));
+      setLoading(false);
+      return;
+    }
+
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      setLoading(false);
+      return;
+    }
+
     if ("geolocation" in navigator) {
 
-      if (!navigator.geolocation) {
-        alert("Geolocation is not supported by your browser.");
-        setLoading(false);
-        return;
-      }
 
-      // Ask user with an alert before requesting location
-      const userConsent = window.confirm([
-        "Allow access to your location?",
-        "For a better experience, please allow access to your location.",
-      ].join("\n"));
-      if (!userConsent) {
-        dispatchEvent(userLocationSet(null));
-        setLoading(false);
-        return;
-      }
+
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userLat = position.coords.latitude;
@@ -247,11 +253,11 @@ const Home = () => {
               <h2 className="text-2xl my-3 font-semibold text-slate-600">Recent Offers</h2>
               <div className="flex w-full no-scrollbar">
                 <div className="w-[65rem] lg:w-[90rem] flex flex-col gap-4">
-                  {
+                  {/* {
                     sortedShops.map((listing, idx) => (
                       !listing.isExpired ? <ShopBox key={idx} listing={listing} getDistance={getDistance} /> : null
                     ))
-                  }
+                  } */}
                 </div>
               </div>
 

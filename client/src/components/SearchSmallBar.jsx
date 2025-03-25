@@ -57,25 +57,27 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
         setLoading(true);
         // console.log("working1")
 
+        // Ask user with an alert before requesting location
+        const userConsent = window.confirm([
+            "Allow access to your location?",
+            "For a better experience, please allow access to your location.",
+        ].join("\n"));
+        if (!userConsent) {
+            dispatchEvent(userLocationSet(null));
+            setLoading(false);
+            return;
+        }
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser.");
+            setLoading(false);
+            return;
+        }
+
         if ("geolocation" in navigator) {
             // console.log("working2")
 
-            if (!navigator.geolocation) {
-                alert("Geolocation is not supported by your browser.");
-                setLoading(false);
-                return;
-            }
 
-            // Ask user with an alert before requesting location
-            const userConsent = window.confirm([
-                "Allow access to your location?",
-                "For a better experience, please allow access to your location.",
-            ].join("\n"));
-            if (!userConsent) {
-                dispatchEvent(userLocationSet(null));
-                setLoading(false);
-                return;
-            }
+
 
 
             navigator.geolocation.getCurrentPosition(
