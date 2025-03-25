@@ -219,7 +219,7 @@ const Home = () => {
         </div>
 
         {sortedShops && sortedShops.length > 0 && (
-          <SearchBar sortedShops={sortedShops} setSortedShops={setSortedShops} getDistance={getDistance} getUserLocation={getUserLocation} flag={flag} />
+          <SearchBar sortedShops={sortedShops} setSortedShops={setSortedShops} getUserLocation={getUserLocation} flag={flag} />
         )}
       </div>
 
@@ -255,7 +255,7 @@ const Home = () => {
                 <div className="w-[65rem] lg:w-[90rem] flex flex-col gap-4">
                   {
                     sortedShops.map((listing, idx) => (
-                      !listing.isExpired ? <ShopBox key={idx} listing={listing} getDistance={getDistance} /> : null
+                      !listing.isExpired ? <ShopBox key={idx} listing={listing} /> : null
                     ))
                   }
                 </div>

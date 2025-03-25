@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PricingPage = () => {
     // Language state (default: English)
     const [isEnglish, setIsEnglish] = useState(true);
     const { currentUser } = useSelector((state) => state.user);
 
-
+    const navigate = useNavigate();
 
 
 
@@ -59,21 +60,27 @@ const PricingPage = () => {
     ];
 
     const handlePricingRequest = async (pricing, planType, planName) => {
-        // Implement your pricing request logic here
-        // console.log("Pricing request submitted", price, planType, planName);
-        try {
-            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/main/pricing-request`, { userId: currentUser._id, userMobile: currentUser.mobileNum, userName: currentUser.username, pricing, planType, planName }).then(async (res) => {
-                if (res.data) {
-                    alert(res.data.message)
-                    // console.log(res.data)
-                    // dispatchEvent(userCodeSet(res.data))
-                    // setUserCode(res.data)
-                    // setShops([])
 
-                }
-            })
-        } catch (err) {
-            alert("Error", err.response.data.message);
+        if (currentUser && currentUser._id) {
+
+            // Implement your pricing request logic here
+            // console.log("Pricing request submitted", price, planType, planName);
+            try {
+                await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/main/pricing-request`, { userId: currentUser._id, userMobile: currentUser.mobileNum, userName: currentUser.username, pricing, planType, planName }).then(async (res) => {
+                    if (res.data) {
+                        alert(res.data.message)
+                        // console.log(res.data)
+                        // dispatchEvent(userCodeSet(res.data))
+                        // setUserCode(res.data)
+                        // setShops([])
+
+                    }
+                })
+            } catch (err) {
+                alert("Error", err.response.data.message);
+            }
+        } else {
+            navigate("/auth-user")
         }
     };
 
