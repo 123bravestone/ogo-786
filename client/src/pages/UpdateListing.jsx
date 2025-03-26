@@ -12,9 +12,9 @@ import Loader from "../components/Loader";
 export default function UpdateListing() {
 
 
-    const shopTypes = ["Clothes", "Electronics", "Mobile", "Footware", "Accessories", "Grocery", "Supermarket", "Pharmacy"];
+    const shopTypes = ["Clothing", "Supermarket", "Footware", "Grocery Mart", "Pharmacy", "Book", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories", "Mobile", "Hair Salon", "Others"];
 
-    const discountTypes = ["10%", " 15%", "20%", "buy 1 get 1", "upto 50%", "upto 60%", "upto 70%", "upto 75%", "100 off on 1st order"];
+    const discountTypes = ["10% Off", "15% Off", "20% Off", "buy 1 get 1", "upto 50%", "upto 60%", "upto 70%", "upto 75%", "₹20 cashback on order above ₹250 ", "₹200 Off", "₹300 Off", "₹400 Off", "₹500 Off"];
 
 
 

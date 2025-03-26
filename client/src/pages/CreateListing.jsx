@@ -430,7 +430,7 @@ export default function CreateListing() {
                     </div>
                     <div className="flex flex-col flex-1 gap-4">
                         <AddressSearch setFormData={setFormData} formData={formData} />
-                        <ImageUpload setUploading={setUploading} setFormData={setFormData} formData={formData} creating={true} />
+                        <ImageUpload setUploading={setUploading} setFormData={setFormData} formData={formData} />
 
 
                         <button
