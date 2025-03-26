@@ -255,8 +255,9 @@ const Home = () => {
                 <div className="w-[65rem] lg:w-[90rem] flex flex-col gap-4">
                   {
                     sortedShops.map((listing, idx) => (
-                      !listing.isExpired ? <ShopBox key={idx} listing={listing} /> : null
+                      <ShopBox key={idx} listing={listing} />
                     ))
+
                   }
                 </div>
               </div>

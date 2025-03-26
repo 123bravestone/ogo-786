@@ -199,7 +199,7 @@ export const SearchListings = async (req, res) => {
         // console.log("work3", req.query.offer);
 
 
-        const listing = await Listing.find({ shopname: { $regex: shop, $options: 'i' }, address: { $regex: city, $options: 'i' }, discountOffer: { $regex: discountOffer, $options: 'i' }, shoptype: { $regex: shoptype, $options: 'i' }, offer: offer }).limit(limit).skip(startIndex);
+        const listing = await Listing.find({ shopname: { $regex: shop, $options: 'i' }, address: { $regex: city, $options: 'i' }, discountOffer: { $regex: discountOffer, $options: 'i' }, shoptype: { $regex: shoptype, $options: 'i' }, offer: offer, isExpired: false }).limit(limit).skip(startIndex);
         // const listing = await Listing.find({ shopname: { $regex: shop, $options: 'i' } })
         // const listing = await Listing.find({ shopname: { $regex: shop, $options: 'i' }, address: { $regex: city, $options: 'i' }, offer: offer, shoptype: shoptype }).limit(limit).skip(startIndex);
 
