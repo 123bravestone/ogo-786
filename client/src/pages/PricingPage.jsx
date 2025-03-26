@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const PricingPage = () => {
     // Language state (default: English)
@@ -86,6 +87,14 @@ const PricingPage = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+
+            <SEO
+                title="Affordable Listing Plans - Monthly & Yearly | OfflineGo"
+                description="Choose the best subscription plan for listing your shop on OfflineGo. Get more visibility with our monthly and yearly pricing options."
+                keywords="listing plans, shop subscription, monthly pricing, yearly subscription, OfflineGo pricing"
+                ogImage="https://offlinego.in/store.png"
+                url="https://offlinego.in/price-user"
+            />
             {/* Language Toggle */}
             <div className="mb-6 flex items-center space-x-3">
                 <span className="text-lg font-semibold text-gray-700">

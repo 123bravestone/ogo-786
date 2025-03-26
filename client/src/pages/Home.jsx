@@ -11,6 +11,7 @@ import Loader from '../components/Loader';
 import { FaSearch } from 'react-icons/fa';
 import { signInSuccess, userLocationSet } from '../app/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
+import SEO from '../components/SEO.jsx';
 
 
 // const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -179,6 +180,13 @@ const Home = () => {
 
   return (
     <div className='overflow-x-scroll no-scrollbar'>
+      <SEO
+        title="OfflineGO - Shopping Platform & Find Shops Near You"
+        description="Best local shopping platform to discover and shop from local stores with OfflineGo. Find amazing deals, support small businesses, and enjoy a better offline shopping experience."
+        keywords="offline shopping, local stores, buy local, nearby shops"
+        ogImage="https://offlinego.in/store.png"
+        url="https://offlinego.in"
+      />
       {/* Image Section */}
       {loading && <Loader />}
       <div className="relative">
