@@ -57,7 +57,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/upload`, imagesData, {
-
+                headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
                     const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                     setUploadProgress(percent);
