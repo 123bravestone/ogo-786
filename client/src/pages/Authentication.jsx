@@ -7,6 +7,7 @@ import OTPverify from '../components/OTPverify';
 import UserName from '../components/UserName';
 import { useDispatch } from 'react-redux';
 import { signInStart, signInFailure, signInSuccess } from '../app/user/userSlice';
+import SEO from '../components/SEO';
 
 
 export default function Authentication() {
@@ -116,6 +117,13 @@ export default function Authentication() {
 
   return (
     <div>
+      <SEO
+        title="Login | OfflineGO"
+        description="Access your OfflineGO account for users find shops and shop owners to manage your shop listings and subscriptions. Secure and easy login for shop owners."
+        keywords="OfflineGo login, shop owner login, access account, business dashboard, shop listing management"
+        ogImage="https://offlinego.in/store.png"
+        url="https://offlinego.in/auth-user"
+      />
       {flag ? <OTPverify handleOTP={handleOTP} sendOTP={sendOTP} loading={loading} setOtp={setOtp} error={error} /> : !flag && otpTrue ? <UserName handleName={handleName} loading={loading} setUsername={setUsername} error={error} /> : <MobileNum handleSubmit={handleSubmit} loading={loading} setMobNum={setMobNum} error={error} />}
     </div>
   )
