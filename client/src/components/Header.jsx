@@ -79,7 +79,7 @@ export default function Header() {
 
 
                     <Link to='/profile'>
-                        {currentUser ? (
+                        {currentUser && currentUser._id ? (
 
 
                             currentUser.imageUrl ? <img className='rounded-full border-2 border-white h-8 w-8 object-cover' src={currentUser.imageUrl} alt='profile_img' /> : (<img className='rounded-full  border-2 border-white h-8 w-8 object-cover' src={UserProfile} alt='profile_img' />)

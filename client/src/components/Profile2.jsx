@@ -36,7 +36,7 @@ const ProfileUser = () => {
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/upload`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+
                 onUploadProgress: (progressEvent) => {
 
                     setUploadProgress(Math.round((progressEvent.loaded / progressEvent.total) * 100));
