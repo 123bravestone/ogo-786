@@ -197,11 +197,7 @@ const Home = () => {
       <div className="relative">
 
 
-<<<<<<< HEAD
         <div className=" bg-cover overflow-hidden bg-center bg-no-repeat flex items-center justify-center">
-=======
-        <div className=" overflow-hidden bg-cover bg-center bg-no-repeat flex items-center justify-center">
->>>>>>> be9818a (8:48 temp-branch)
           <div
             className="flex w-full h-full transition-transform duration-700 ease-in-out "
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -243,7 +239,6 @@ const Home = () => {
       {/* <ShopList /> */}
 
       <div className="flex flex-col gap-6 p-6 px-3 max-w-6xl mx-auto mt-[20px]">
-<<<<<<< HEAD
         <h1 className='text-blue-600 font-bold text-3xl lg:text-6xl'>
           Find your nearest <span className='text-slate-500'>perfect shops</span>
           <br />
@@ -252,16 +247,6 @@ const Home = () => {
           This place is helping you to find nearest shop
           <br />
           for you to offline shopping with best discount price and offers.
-=======
-        <h1 className='text-blue-700 font-bold text-3xl lg:text-6xl'>
-          Find your nearest <span className='text-slate-500'>perfect shops</span>
-
-        </h1>
-        <div className="text-gray-600 text-sm sm:text-sm">
-          This platform is helping you to find a nearest shops
-          <br />
-          for you to shopping with best discount price and offer.
->>>>>>> be9818a (8:48 temp-branch)
         </div>
 
         {/* <ScratchCard /> */}
