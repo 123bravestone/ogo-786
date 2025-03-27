@@ -63,10 +63,19 @@ export default function Authentication() {
       try {
         await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/verify_otp`, { _id: userId, otp: otp }).then(async (response) => {
           if (response.data) {
-            if (response.data.username !== "") {
+            const user = response.data.user;
+            if (user.username !== "") {
               // console.log(response.data)
-              dispatchEvent(signInSuccess(response.data))
-              return navigate("/");
+              dispatchEvent(signInSuccess(user))
+
+              if (response.data.listingID !== null) {
+
+                return navigate(`/listing/${response.data.listingID}`, { replace: true });
+              } else {
+
+                return navigate("/", { replace: true });
+              }
+
             } else {
 
               setFlag(false);
