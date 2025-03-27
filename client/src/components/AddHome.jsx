@@ -15,11 +15,11 @@ const AddHome = () => {
             setDeferredPrompt(event);
 
             // Show alert if not installed
-            setTimeout(() => {
-                if (!isInstalled) {
+            if (!isInstalled) {
+                setTimeout(() => {
                     setShowInstallPrompt(true);
-                }
-            }, 5000);
+                }, 5000);
+            }
         });
 
         // Check if user has already installed the app
@@ -53,7 +53,6 @@ const AddHome = () => {
 
     return (
         <div>
-            <h1>Welcome to My Website</h1>
 
             {showInstallPrompt && (
                 <div className="install-alert">
