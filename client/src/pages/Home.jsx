@@ -4,6 +4,7 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import Image1 from '../assets/canvas_Image/1.png'
 import Image2 from '../assets/canvas_Image/2.png'
 import Image3 from '../assets/canvas_Image/3.png'
+import Image4 from '../assets/canvas_Image/4.png'
 import SearchBar from '../components/SearchBar';
 import ShopBox from '../components/Shopbox';
 import axios from 'axios';
@@ -44,6 +45,7 @@ const Home = () => {
     Image1,
     Image2,
     Image3,
+    Image4,
   ];
 
 
@@ -181,7 +183,7 @@ const Home = () => {
   return (
     <div className='overflow-x-scroll no-scrollbar'>
       <SEO
-        title="OfflineGO - Shopping Platform & Find Shops Near You"
+        title="OfflineGO - Offline Shopping & Find Shops Near You"
         description="Best local shopping platform to discover and shop from local stores with OfflineGo. Find amazing deals, support small businesses, and enjoy a better offline shopping experience."
         keywords="offline shopping, local stores, buy local, nearby shops"
         ogImage="https://offlinego.in/store.png"
@@ -234,14 +236,14 @@ const Home = () => {
       {/* <ShopList /> */}
 
       <div className="flex flex-col gap-6 p-6 px-3 max-w-6xl mx-auto mt-[20px]">
-        <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500'>perfect</span>
-          <br />place to shop
-        </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          This place is helping you to find a perfect shop
+        <h1 className='text-blue-600 font-bold text-3xl lg:text-6xl'>
+          Find your nearest <span className='text-slate-500'>perfect shops</span>
           <br />
-          for you to buy product with best discount price.
+        </h1>
+        <div className="text-gray-500 text-sm sm:text-sm">
+          This place is helping you to find nearest shop
+          <br />
+          for you to offline shopping with best discount price and offers.
         </div>
 
         {/* <ScratchCard /> */}

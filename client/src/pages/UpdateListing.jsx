@@ -199,7 +199,7 @@ export default function UpdateListing() {
 
             await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/update-listing/${params.listingId}`, { ...formData, userRef: currentUser._id }).then(async (res) => {
                 if (res.data) {
-                    navigate(`/listing/${res.data._id}`)
+                    navigate(`/listing/${res.data._id}`, { replace: true });
                 }
             })
             // const res = await fetch(`/api/listing/update/${params.listingId}`, {

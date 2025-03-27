@@ -107,7 +107,7 @@ const Coupons = () => {
       </div>
       <div className=" grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-center gap-6 overflow-x-scroll no-scrollbar">
         {
-          userCode && userCode.map((userC, index) => (
+          userCode ? userCode.map((userC, index) => (
             <div key={index} className="bg-gray-100 relative shadow-md rounded-[30px] hover:shadow-lg transition-shadow overflow-hidden ">
               <img
                 src={arrImage[index]}
@@ -130,7 +130,11 @@ const Coupons = () => {
                 </p>
               </div>
             </div>
-          ))
+          )) : (
+            <div className="bg-gray-100 relative shadow-md rounded-[30px] hover:shadow-lg transition-shadow overflow-hidden flex items-center justify-center">
+              <p className=" text-slate-800 m-3 text-[16px] font-bold ">More Coupons Available in Future</p>
+            </div>
+          )
         }
       </div>
 
