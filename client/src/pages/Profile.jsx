@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { signInSuccess } from '../app/user/userSlice.js'
 import axios from "axios"
@@ -10,6 +10,7 @@ const Profile = () => {
 
   const { currentUser, imageOld } = useSelector((state) => state.user);
   const dispatchEvent = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
 
@@ -69,6 +70,7 @@ const Profile = () => {
       }).then(async (res) => {
         if (res.data) {
           dispatchEvent(signInSuccess())
+          navigate("/auth-user", { replace: true });
         } else {
           setError("Something went wrong! User still Login")
         }
