@@ -16,7 +16,7 @@ dotenv.config();
 
 const app = express()
 
-// app.use(cors())
+app.use(cors())
 
 
 app.use(express.json())
@@ -27,12 +27,12 @@ app.use('/api/allshop', allshopRouter)
 app.use('/api/main', mainRouter)
 app.use('/', sitemapRouter)
 
-const corsOptions = {
-    origin: process.env.CLIENT_URL, // Allow only your frontend domain
-    methods: "GET, POST, PUT, DELETE, OPTIONS",
-    allowedHeaders: "Content-Type, Authorization"
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: process.env.CLIENT_URL, // Allow only your frontend domain
+//     methods: "GET, POST, PUT, DELETE, OPTIONS",
+//     allowedHeaders: "Content-Type, Authorization"
+// };
+// app.use(cors(corsOptions));
 
 // If using Cloudinary, ensure the API call has CORS headers
 

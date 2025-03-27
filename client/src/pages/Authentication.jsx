@@ -31,16 +31,29 @@ export default function Authentication() {
     if (mobNum.length === 10) {
       try {
         await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/verify_phone`, { mobileNum: mobNum }).then(async (response) => {
-          setFlag(true);
-          setUserId(response.data._id);
-          setSendOTP(response.data.otp);
+          if (response.data.success) {
+
+            setFlag(true);
+            setSendOTP(response.data.otp);
+            setUserId(response.data._id);
+            setError("");
+
+
+          }
+          else if (response.data.success === false && response.data.otp !== null) {
+            setFlag(true);
+            setSendOTP(null)
+            setUserId(response.data._id);
+            setError("");
+
+          } else {
+            setError("OTP not sent try again Najjam");
+          }
 
 
         });
-        setError("");
         setLoading(false);
         e.target.reset();
-        // navigate("/otp");
 
       } catch (error) {
         setLoading(false);
