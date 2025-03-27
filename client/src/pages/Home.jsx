@@ -13,6 +13,7 @@ import { FaSearch } from 'react-icons/fa';
 import { signInSuccess, userLocationSet } from '../app/user/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import SEO from '../components/SEO.jsx';
+import AddHome from '../components/AddHome.jsx';
 
 
 // const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -189,6 +190,8 @@ const Home = () => {
         ogImage="https://offlinego.in/store.png"
         url="https://offlinego.in"
       />
+
+      <AddHome />
       {/* Image Section */}
       {loading && <Loader />}
       <div className="relative">
