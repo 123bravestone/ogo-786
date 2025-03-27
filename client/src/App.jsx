@@ -17,6 +17,7 @@ import PricingPage from './pages/PricingPage.jsx'
 import PriceRequest from './pages/PriceRequest.jsx'
 import EducationPage from './pages/EducationPage.jsx'
 import Header from './components/Header.jsx'
+import AddToHomeScreen from './components/AddToHomeScreen.jsx'
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
       </p> */}
 
       <BrowserRouter >
-
+        <AddToHomeScreen />
         <Header></Header>
 
         {/* <ShopBox /> */}

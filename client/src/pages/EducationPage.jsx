@@ -73,7 +73,7 @@ const EducationPage = () => {
                 {/* Language Toggle */}
                 <div className=" flex justify-end">
                     <button
-                        onClick={toggleLanguage}
+                        // onClick={toggleLanguage}
                         className="fixed px-4 py-2 text-white bg-blue-500 rounded-lg text-[12px] shadow-md z-10"
                     >
                         {language === "en" ? "हिन्दी में पढ़ें" : "English"}

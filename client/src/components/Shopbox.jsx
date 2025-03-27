@@ -98,7 +98,11 @@ const ShopBox = ({ listing }) => {
                     </p>
 
                 </div>
-                <p className="mt-2 text-green-600 font-semibold  ">🕒 Open till{" "}{listing.closeTime} {listing.ctime}</p>
+                {listing.isOpen ? (
+                    <p className="mt-2 text-green-600 font-semibold  ">🕒 Open till{" "}{listing.closeTime} {listing.ctime}</p>
+                ) : (
+                    <p className="mt-2 text-red-600 font-semibold  ">🕒 Closed </p>
+                )}
                 <div className="flex justify-end items-start h-full">
                     <WhatsAppButton listingID={listing._id} phoneNumber={listing.whatsAppNo} latitude={listing.latitude} longitude={listing.longitude} home={true} />
                 </div>

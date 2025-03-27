@@ -165,7 +165,7 @@ export default function CreateListing() {
 
             await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/create-listing`, { ...formData, userRef: currentUser._id }).then(async (res) => {
                 if (res.data) {
-                    navigate(`/listing/${res.data._id}`)
+                    navigate(`/listing/${res.data._id}`, { replace: true });
                     // console.log("working")
                 }
             });

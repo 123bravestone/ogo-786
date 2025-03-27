@@ -38,9 +38,17 @@ export const createUser = async (req, res) => {
 export const verifyOTP = async (req, res) => {
   try {
     const { _id, otp } = req.body;
+
+
     const user = await User.findOne({ _id, otpCode: otp });
+
+
     if (user) {
-      return res.status(201).json(user);
+      const existListing = await Listing.findOne({ userRef: _id });
+      if (existListing) {
+        return res.status(201).json({ message: "You already have a listing", listingID: existListing._id, user: user });
+      }
+      return res.status(201).json({ message: "OTP verified successfully", listingID: null, user: user });
     } else {
       return res.status(201).json(false);
     }
