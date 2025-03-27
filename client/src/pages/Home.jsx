@@ -197,7 +197,7 @@ const Home = () => {
       <div className="relative">
 
 
-        <div className=" bg-cover bg-center bg-no-repeat flex items-center justify-center">
+        <div className=" bg-cover overflow-hidden bg-center bg-no-repeat flex items-center justify-center">
           <div
             className="flex w-full h-full transition-transform duration-700 ease-in-out "
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
