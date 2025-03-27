@@ -28,7 +28,7 @@ app.use('/api/main', mainRouter)
 // app.use('/', sitemapRouter)
 
 const corsOptions = {
-    origin: "https://offlinego.in", // Allow only your frontend domain
+    origin: process.env.CLIENT_URL, // Allow only your frontend domain
     methods: "GET, POST, PUT, DELETE, OPTIONS",
     allowedHeaders: "Content-Type, Authorization"
 };
