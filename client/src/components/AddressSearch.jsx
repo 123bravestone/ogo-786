@@ -19,7 +19,7 @@ const AddressSearch = ({ setFormData, formData }) => {
 
                 // Fetch location name from LocationIQ API
                 fetch(
-                    `https://us1.locationiq.com/v1/reverse.php?key=pk.f734e7022780affd32ba44a7e0d387e7&lat=${lat}&lon=${lng}&format=json`
+                    `https://us1.locationiq.com/v1/reverse.php?key=${import.meta.env.VITE_LOCATIONIQ_API_KEY}&lat=${lat}&lon=${lng}&format=json`
                 )
                     .then((res) => res.json())
                     .then((data) => {

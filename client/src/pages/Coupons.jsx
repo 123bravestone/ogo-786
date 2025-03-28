@@ -1,42 +1,42 @@
-import { useEffect, useState } from 'react'
+import React from "react";
+// import { useEffect, useState } from 'react'
 
-import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { userCodeSet } from '../app/user/userSlice';
+// import { userCodeSet } from '../app/user/userSlice';
 
-import Image1 from "../assets/ShopImages/clothingStore.jpeg"
-import Image2 from "../assets/ShopImages/supermarket.jpeg"
-import Image3 from "../assets/ShopImages/footwareStore.jpeg"
-import Image4 from "../assets/ShopImages/groceryStore.jpeg"
-import Image5 from "../assets/ShopImages/pharmacy.jpeg"
-import Image6 from "../assets/ShopImages/bookStore.jpeg"
-import Image7 from "../assets/ShopImages/library.jpeg"
-import Image8 from "../assets/ShopImages/bakeryStore.jpeg"
-import Image9 from "../assets/ShopImages/restaurant.jpeg"
-import Image10 from "../assets/ShopImages/cafeStore.jpeg"
-import Image11 from "../assets/ShopImages/fastfoodStore.jpeg"
-import Image12 from "../assets/ShopImages/gadjetStore.jpeg"
-import Image13 from "../assets/ShopImages/mobileStore.jpeg"
-import Image14 from "../assets/ShopImages/hairSalon.jpeg"
-import Image15 from "../assets/ShopImages/other.jpeg"
+// import Image1 from "../assets/ShopImages/clothingStore.jpeg"
+// import Image2 from "../assets/ShopImages/supermarket.jpeg"
+// import Image3 from "../assets/ShopImages/footwareStore.jpeg"
+// import Image4 from "../assets/ShopImages/groceryStore.jpeg"
+// import Image5 from "../assets/ShopImages/pharmacy.jpeg"
+// import Image6 from "../assets/ShopImages/bookStore.jpeg"
+// import Image7 from "../assets/ShopImages/library.jpeg"
+// import Image8 from "../assets/ShopImages/bakeryStore.jpeg"
+// import Image9 from "../assets/ShopImages/restaurant.jpeg"
+// import Image10 from "../assets/ShopImages/cafeStore.jpeg"
+// import Image11 from "../assets/ShopImages/fastfoodStore.jpeg"
+// import Image12 from "../assets/ShopImages/gadjetStore.jpeg"
+// import Image13 from "../assets/ShopImages/mobileStore.jpeg"
+// import Image14 from "../assets/ShopImages/hairSalon.jpeg"
+// import Image15 from "../assets/ShopImages/other.jpeg"
 
 
 const Coupons = () => {
 
-  const arrShop = ["Clothing Store", "Supermarket", "Footware Store", "Grocery Mart", "Pharmacy", "Book Store", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories Store", "Mobile Store", "Hair Salon", "Others"];
-  // const arrShop = ["Grocery Mart", "Footwear Hub", "Clothing Store", "Tech Haven", "Organic Market", "Supermarket", "Pharmacy", "Hair Salon", "Cafe", "Book Store", "Restaurant", "Library", "Bakery", "Fast Food", , "Footware Store", "Accessories Store", "Mobile Store", "Electronics", "Laptop Store", "Furniture Store", "High-Tech", "Others"];
+  // const arrShop = ["Clothing Store", "Supermarket", "Footware Store", "Grocery Mart", "Pharmacy", "Book Store", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories Store", "Mobile Store", "Hair Salon", "Others"];
 
-  const arrImage = [Image1, Image2, Image3, Image4, Image5, Image6, Image7, Image8, Image9, Image10, Image11, Image12, Image13, Image14, Image15];
+  // const arrImage = [Image1, Image2, Image3, Image4, Image5, Image6, Image7, Image8, Image9, Image10, Image11, Image12, Image13, Image14, Image15];
 
 
 
 
   // const arrShop = ["Grocery", "Supermarket", "Pharmacy", "Clothes", "Footware", "Accessories", "Mobile", "Electronics", "Laptop", "Furniture", "high-tech", "Others"];
 
-  const dispatchEvent = useDispatch();
-  const { userCode } = useSelector((state) => state.user);
+  // const dispatchEvent = useDispatch();
+  // const { userCode } = useSelector((state) => state.user);
 
-  const [shops, setShops] = useState([]);
+  // const [shops, setShops] = useState([]);
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -106,7 +106,7 @@ const Coupons = () => {
         <p className='text-white font-bold text-[20px] '>{currentUser._id.slice(-6).toString().toUpperCase()}</p>
       </div>
       <div className=" grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-center gap-6 overflow-x-scroll no-scrollbar">
-        {
+        {/* {
           userCode ? userCode.map((userC, index) => (
             <div key={index} className="bg-gray-100 relative shadow-md rounded-[30px] hover:shadow-lg transition-shadow overflow-hidden ">
               <img
@@ -118,7 +118,6 @@ const Coupons = () => {
                 <p className=" text-blue-500 m-3 text-[24px] font-bold ">
                   {userC.couponCode.toString().toUpperCase()}
 
-                  {/* {listing.type === 'rent' && '/ month'} */}
                 </p>
               </div>
               <div className="p-3">
@@ -126,7 +125,6 @@ const Coupons = () => {
                 <p className=" text-slate-800 m-3 text-[16px] font-bold ">
                   {userC.shoptype} Discount Code:
 
-                  {/* {listing.type === 'rent' && '/ month'} */}
                 </p>
               </div>
             </div>
@@ -135,7 +133,11 @@ const Coupons = () => {
               <p className=" text-slate-800 m-3 text-[16px] font-bold ">More Coupons Available in Future</p>
             </div>
           )
-        }
+        } */}
+
+        <div className="bg-gray-100 relative shadow-md rounded-[30px] hover:shadow-lg transition-shadow overflow-hidden flex items-center justify-center">
+          <p className=" text-slate-800 m-3 text-[16px] font-bold ">More Coupons Available in Future</p>
+        </div>
       </div>
 
 

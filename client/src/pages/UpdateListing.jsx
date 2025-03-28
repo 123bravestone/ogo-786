@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import AddressSearch from "../components/AddressSearch";
+// import AddressSearch from "../components/AddressSearch";
 import ImageUpload from "../components/uploadImages";
 import Loader from "../components/Loader";
+// import LocationBox from "../components/LocationBox";
 
 
 
@@ -347,52 +348,6 @@ export default function UpdateListing() {
                         <div className="flex flex-wrap gap-6">
 
 
-
-                            <div className=" relative w-full ">
-                                {/* Label (moves up when focused or has value) */}
-                                <label
-                                    className={`absolute transition-all left-4  duration-300 ${isFocused && formData.shoptype || formData.shoptype.length > 0 && formData.shoptype ? "top-1 text-[10px]  text-slate-700 font-semibold" : "top-4  text-[15px] text-gray-500 -z-10"
-                                        }`}
-                                >
-                                    Shop type
-                                </label>
-
-                                <input
-                                    type="text"
-                                    // value={searchTerm}
-                                    onChange={handleChange}
-                                    onFocus={() => setIsFocused(true)}
-                                    onBlur={() => setIsFocused(false)}
-                                    id="shoptype"
-                                    value={formData.shoptype}
-                                    className="border p-3 border-blue-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                    autoComplete="off"
-
-                                />
-
-                                {/* Search Results - Show only if searchTerm exists */}
-                                {shopResult && filteredShopTypes.length > 0 ? (
-                                    <div className=" absolute z-10 top-[80%]   mt-2 w-80 bg-white shadow-lg rounded-lg ">
-                                        {filteredShopTypes.map((item, index) => (
-                                            <p
-                                                key={index}
-                                                onClick={() => {
-                                                    setFormData({ ...formData, shoptype: item });
-                                                    setshopResults(false);
-                                                }}
-                                                className="p-3 border-b last:border-none hover:bg-gray-200 cursor-pointer"
-                                            >
-                                                {item}
-                                            </p>
-                                        ))}
-                                    </div>
-                                ) : filteredShopTypes.length === 0 && shopResult ? (
-                                    <p className="p-3 text-gray-600">No items found</p>
-                                ) : ""}
-
-                            </div>
-
                             {formData.offer &&
 
                                 <div className=" relative w-full ">
@@ -445,6 +400,53 @@ export default function UpdateListing() {
 
                             }
 
+
+                            <div className=" relative w-full ">
+                                {/* Label (moves up when focused or has value) */}
+                                <label
+                                    className={`absolute transition-all left-4  duration-300 ${isFocused && formData.shoptype || formData.shoptype.length > 0 && formData.shoptype ? "top-1 text-[10px]  text-slate-700 font-semibold" : "top-4  text-[15px] text-gray-500 -z-10"
+                                        }`}
+                                >
+                                    Shop type
+                                </label>
+
+                                <input
+                                    type="text"
+                                    // value={searchTerm}
+                                    onChange={handleChange}
+                                    onFocus={() => setIsFocused(true)}
+                                    onBlur={() => setIsFocused(false)}
+                                    id="shoptype"
+                                    value={formData.shoptype}
+                                    className="border p-3 border-blue-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                    autoComplete="off"
+
+                                />
+
+                                {/* Search Results - Show only if searchTerm exists */}
+                                {shopResult && filteredShopTypes.length > 0 ? (
+                                    <div className=" absolute z-10 top-[80%]   mt-2 w-80 bg-white shadow-lg rounded-lg ">
+                                        {filteredShopTypes.map((item, index) => (
+                                            <p
+                                                key={index}
+                                                onClick={() => {
+                                                    setFormData({ ...formData, shoptype: item });
+                                                    setshopResults(false);
+                                                }}
+                                                className="p-3 border-b last:border-none hover:bg-gray-200 cursor-pointer"
+                                            >
+                                                {item}
+                                            </p>
+                                        ))}
+                                    </div>
+                                ) : filteredShopTypes.length === 0 && shopResult ? (
+                                    <p className="p-3 text-gray-600">No items found</p>
+                                ) : ""}
+
+                            </div>
+
+
                             {formData.closeTime.length > 0 || formData.openTime.length > 0 && error ? <p className="text-red-700 text-sm">{error}</p> : ""}
 
                             <div className="flex flex-row items-center gap-2">
@@ -488,7 +490,9 @@ export default function UpdateListing() {
                         </div>
                     </div>
                     <div className="flex flex-col flex-1 gap-4">
-                        <AddressSearch setFormData={setFormData} formData={formData} />
+                        {/* <AddressSearch setFormData={setFormData} formData={formData} /> */}
+                        {/* <LocationBox setFormData={setFormData} formData={formData} /> */}
+                        <p className="font-semibold text-gray-600 text-[16px] border-2 border-dashed rounded-[20px] p-4  ">{formData.address}</p>
                         <ImageUpload setUploading={setUploading} setFormData={setFormData} formData={formData} />
 
                         {/* <p className="font-semibold">

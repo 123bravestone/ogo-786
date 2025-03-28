@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signInSuccess } from '../app/user/userSlice.js'
 import axios from "axios"
 import ProfileUser from "../components/Profile2.jsx";
+import DeleteAlert from "../components/DeleteAlert.jsx";
 
 const Profile = () => {
 
@@ -24,6 +25,18 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [deleteElement, setDeletElement] = useState(false)
 
+  const [selectedShop, setSelectedShop] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleDeleteClick = (shop) => {
+    setSelectedShop(shop);
+    setShowAlert(true);
+  };
+
+  const handleCancel = () => {
+    setShowAlert(false);
+    setSelectedShop(null);
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -108,7 +121,9 @@ const Profile = () => {
     }
   };
 
-  const handleListingDelete = async (listindId) => {
+  //Delete Listing Item Function
+
+  const handleDeleteConfirm = async (listindId) => {
     try {
       setDeletElement(true)
       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-list-item/${listindId}`, { _id: currentUser._id }).then(async (res) => {
@@ -129,10 +144,10 @@ const Profile = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log("work", typeof currentUser.topAdmin)
+  useEffect(() => {
+    console.log("work", typeof currentUser.topAdmin)
 
-  // }, [])
+  }, [])
 
 
   return (
@@ -210,10 +225,12 @@ const Profile = () => {
           userListing.length === 0 &&
           <div className="bg-slate-200 p-3 mt-2 rounded-lg">
             <p className="text-slate-600 font-bold">Open Digital Shops </p>
-            <p className="mt-8 text-slate-500 text-sm">
+            <p className="mt-6 text-slate-500 text-sm">
               Here you can listing their property over this website by uploading all
               the related details of their property:
+
             </p>
+            <p className="mt-2 text-sm">For any queries you can contact us:<strong className="text-slate-600 text-[16px] font-semibold"> +91 7667650665</strong></p>
             <Link to="/create-listing">
               <p className=" bg-blue-600 p-3 rounded-lg text-white   mt-2 w-full font-semibold   text-center">
                 Create Listing
@@ -261,11 +278,30 @@ const Profile = () => {
                     </Link>
 
                     <button
-                      onClick={() => handleListingDelete(listing._id)}
+                      onClick={() => handleDeleteClick(listing.shopname)}
                       className=" bg-red-100 hover:bg-red-600 border py-1 px-3 rounded-lg text-red-700 hover:text-white"
                     >
                       Delete
                     </button>
+
+                    {/* Show Delete Alert */}
+                    {showAlert && selectedShop && (
+                      <DeleteAlert
+                        shopName={selectedShop}
+                        setDeletElement={setDeletElement}
+                        setUserListing={setUserListing}
+                        setError={setError}
+                        userID={currentUser._id}
+                        listingId={listing._id}
+                        onCancel={handleCancel}
+                      />
+                    )}
+                    {/* <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className=" bg-red-100 hover:bg-red-600 border py-1 px-3 rounded-lg text-red-700 hover:text-white"
+                    >
+                      Delete
+                    </button> */}
                   </div>
                 )}
               </div>

@@ -51,7 +51,7 @@ export default function Authentication() {
       } catch (error) {
         setLoading(false);
         setError(`Something went wrong! ${error}`);
-        console.log(error);
+        console.log("error", error);
       }
     } else {
       setLoading(false);

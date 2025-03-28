@@ -75,7 +75,7 @@ export default function Header() {
                     <Link to="/"><li> About</li></Link>
 
                     {currentUser && currentUser.isAdmin && <Link to="/learn-earn"><li > Learn</li></Link>}
-                    {currentUser && <Link to="/user-coupons"><li > Coupens</li></Link>}
+                    <Link to="/user-coupons"><li > Coupens</li></Link>
 
 
                     <Link to='/profile'>
@@ -115,7 +115,7 @@ export default function Header() {
                         <a href="/" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2 "><BiSolidDetail />About</a>
                         {currentUser && currentUser.isAdmin && <a href="/learn-earn" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><FaBookOpen />Learn</a>}
 
-                        {/* {currentUser && <a href="/user-coupons" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><IoTicket />Coupens</a>} */}
+                        <a href="/user-coupons" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><IoTicket />Coupens</a>
 
                         <a href="/profile" onClick={closeSidebar} className="hover:text-gray-400">
                             {currentUser ? (

@@ -3,6 +3,7 @@ import cloudinary from "../config/cloudStore.js";
 
 import multer from "multer";
 import Request from "../models/mainModel.js";
+import User from "../models/userModel.js";
 const upload = multer({ dest: "uploads/" });
 // Multer config: Accept only images < 20MB
 const storage = multer.memoryStorage();
@@ -116,7 +117,13 @@ export const deleteListItem = async (req, res) => {
     }
 
     try {
-        await Listing.findByIdAndDelete(req.params.id);
+        await Listing.findByIdAndDelete(req.params.id).then(async () => {
+            await Request.findOneAndUpdate({ userId: listing.userRef }, { isExpired: true, status: "pending", planType: "Expired", pricing: "00.00" }).then(async () => {
+                await User.findOneAndUpdate({ _id: listing.userRef }, { isAdmin: false }, { new: true });
+            });
+
+        });
+
         res.status(201).json('Linting has been deleted successfully')
     } catch (error) {
         res.status(402).json({ error: error.message });

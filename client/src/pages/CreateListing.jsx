@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import AddressSearch from "../components/AddressSearch";
+// import AddressSearch from "../components/AddressSearch";
 import ImageUpload from "../components/uploadImages";
+import LocationBox from "../components/LocationBox";
 
 
 
@@ -285,6 +286,60 @@ export default function CreateListing() {
 
                         <div className="flex flex-wrap gap-6">
 
+                            {formData.offer &&
+
+                                <div className=" relative w-full ">
+                                    <label
+                                        className={`absolute transition-all left-4  duration-300 ${isFocused && formData.discountOffer || formData.discountOffer.length > 0 && formData.discountOffer ? "top-1 text-[10px]  text-slate-700 font-semibold" : "top-4  text-[15px] text-gray-500 -z-10"
+                                            }`}
+                                    >
+                                        Recommended offers
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="discountOffer"
+                                        min="5"
+                                        // value={searchTerm}
+                                        onChange={handleChange}
+                                        onFocus={() => setIsFocused(true)}
+                                        onBlur={() => setIsFocused(false)}
+                                        value={formData.discountOffer}
+                                        className="border p-3 border-blue-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                        maxLength={42}
+                                        autoComplete="off"
+
+                                    />
+
+                                    {/* Search Results - Show only if searchTerm exists */}
+                                    {discountResult && filteredDiscountTypes.length > 0 ? (
+                                        <div className=" absolute z-10 top-[80%]   mt-2 w-80 bg-white shadow-lg rounded-lg ">
+                                            {filteredDiscountTypes.map((item, index) => (
+                                                <p
+                                                    key={index}
+                                                    onClick={() => {
+                                                        setFormData({ ...formData, discountOffer: item });
+                                                        setdiscountResults(false);
+                                                    }
+                                                    }
+                                                    className="p-3 border-b last:border-none hover:bg-gray-200 cursor-pointer"
+                                                >
+                                                    {item}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    ) : filteredDiscountTypes.length === 0 && discountResult ? (
+                                        <p className="p-3 text-gray-600">Good offer</p>
+                                    ) : ""}
+
+                                </div>
+
+
+
+                            }
+
+
 
 
                             <div className=" relative w-full ">
@@ -333,58 +388,6 @@ export default function CreateListing() {
 
                             </div>
 
-                            {formData.offer &&
-
-                                <div className=" relative w-full ">
-                                    <label
-                                        className={`absolute transition-all left-4  duration-300 ${isFocused && formData.discountOffer || formData.discountOffer.length > 0 && formData.discountOffer ? "top-1 text-[10px]  text-slate-700 font-semibold" : "top-4  text-[15px] text-gray-500 -z-10"
-                                            }`}
-                                    >
-                                        Recommended offers
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        id="discountOffer"
-                                        min="5"
-                                        // value={searchTerm}
-                                        onChange={handleChange}
-                                        onFocus={() => setIsFocused(true)}
-                                        onBlur={() => setIsFocused(false)}
-                                        value={formData.discountOffer}
-                                        className="border p-3 border-blue-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        required
-                                        maxLength={32}
-                                        autoComplete="off"
-
-                                    />
-
-                                    {/* Search Results - Show only if searchTerm exists */}
-                                    {discountResult && filteredDiscountTypes.length > 0 ? (
-                                        <div className=" absolute z-10 top-[80%]   mt-2 w-80 bg-white shadow-lg rounded-lg ">
-                                            {filteredDiscountTypes.map((item, index) => (
-                                                <p
-                                                    key={index}
-                                                    onClick={() => {
-                                                        setFormData({ ...formData, discountOffer: item });
-                                                        setdiscountResults(false);
-                                                    }
-                                                    }
-                                                    className="p-3 border-b last:border-none hover:bg-gray-200 cursor-pointer"
-                                                >
-                                                    {item}
-                                                </p>
-                                            ))}
-                                        </div>
-                                    ) : filteredDiscountTypes.length === 0 && discountResult ? (
-                                        <p className="p-3 text-gray-600">Good offer</p>
-                                    ) : ""}
-
-                                </div>
-
-
-
-                            }
 
                             {formData.closeTime.length > 0 || formData.openTime.length > 0 && error ? <p className="text-red-700 text-sm">{error}</p> : ""}
 
@@ -429,7 +432,8 @@ export default function CreateListing() {
                         </div>
                     </div>
                     <div className="flex flex-col flex-1 gap-4">
-                        <AddressSearch setFormData={setFormData} formData={formData} />
+                        {/* <AddressSearch setFormData={setFormData} formData={formData} /> */}
+                        <LocationBox setFormData={setFormData} formData={formData} />
                         <ImageUpload setUploading={setUploading} setFormData={setFormData} formData={formData} />
 
 
