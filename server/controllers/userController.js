@@ -16,52 +16,52 @@ const randomNumber = () => {
 };
 
 // Create a new user (POST) /api/user/verify_phone
-export const createUser = async (req, res) => {
-
-  const otp = randomNumber();
-  try {
-    const { mobileNum } = req.body;
-
-
-    const existingUser = await User.findOne({ mobileNum });
-
-    if (existingUser) {
-      const user = await User.findOneAndUpdate({ mobileNum }, { $set: { otpCode: otp } }, { new: true });
-      return res.status(201).json({ success: true, message: "OTP sent successfully", otp: user.otpCode, _id: user._id });
-    } else {
-      //result for SMS OTP only register no. 7667650...
-      const SMSresult = await sendSMS(`+91${mobileNum}`, `OfflineGO, Your OTP is ${otp}. Don't share your OTP with anyone.`);
-
-      if (SMSresult) {
-        const newUser = await User.create({ mobileNum, otpCode: otp });
-        return res.status(201).json({ success: false, message: "OTP sent successfully", otp: newUser.otpCode, _id: newUser._id });
-
-      } else {
-        return res.status(201).json({ success: false, message: "OTP not sent try again", otp: null, _id: null });
-      }
-    }
-  } catch (error) {
-    res.status(402).json({ error: error.message });
-  }
-};
 // export const createUser = async (req, res) => {
 
 //   const otp = randomNumber();
 //   try {
 //     const { mobileNum } = req.body;
 
+
 //     const existingUser = await User.findOne({ mobileNum });
+
 //     if (existingUser) {
 //       const user = await User.findOneAndUpdate({ mobileNum }, { $set: { otpCode: otp } }, { new: true });
-//       return res.status(201).json({ message: "OTP sent successfully", otp: user.otpCode, _id: user._id });
+//       return res.status(201).json({ success: true, message: "OTP sent successfully", otp: user.otpCode, _id: user._id });
 //     } else {
-//       const newUser = await User.create({ mobileNum, otpCode: otp });
-//       res.status(201).json({ message: "OTP sent successfully", otp: newUser.otpCode, _id: newUser._id });
+//       //result for SMS OTP only register no. 7667650...
+//       const SMSresult = await sendSMS(`+91${mobileNum}`, `OfflineGO, Your OTP is ${otp}. Don't share your OTP with anyone.`);
+
+//       if (SMSresult) {
+//         const newUser = await User.create({ mobileNum, otpCode: otp });
+//         return res.status(201).json({ success: false, message: "OTP sent successfully", otp: newUser.otpCode, _id: newUser._id });
+
+//       } else {
+//         return res.status(201).json({ success: false, message: "OTP not sent try again", otp: null, _id: null });
+//       }
 //     }
 //   } catch (error) {
 //     res.status(402).json({ error: error.message });
 //   }
 // };
+export const createUser = async (req, res) => {
+
+  const otp = randomNumber();
+  try {
+    const { mobileNum } = req.body;
+
+    const existingUser = await User.findOne({ mobileNum });
+    if (existingUser) {
+      const user = await User.findOneAndUpdate({ mobileNum }, { $set: { otpCode: otp } }, { new: true });
+      return res.status(201).json({ message: "OTP sent successfully", otp: user.otpCode, _id: user._id });
+    } else {
+      const newUser = await User.create({ mobileNum, otpCode: otp });
+      res.status(201).json({ message: "OTP sent successfully", otp: newUser.otpCode, _id: newUser._id });
+    }
+  } catch (error) {
+    res.status(402).json({ error: error.message });
+  }
+};
 
 // Verify OTP (POST) /api/user/verify_otp
 export const verifyOTP = async (req, res) => {
