@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUserShield, FaUsers } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import ProfileImg from "../assets/Profile.png";
 import { Bar } from "react-chartjs-2"; // Graph
 import "chart.js/auto";
@@ -10,23 +11,24 @@ const UsersDetail = () => {
     const [showGraph, setShowGraph] = useState(false);
     const [adminView, setAdminView] = useState(false);
     const [nonAdminView, setNonAdminView] = useState(true);
+    const params = useParams();
 
     // Fetch Users from Backend
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/all-users`).then((res) => {
-
-                    setUsers(res.data);
-                });
-            } catch (error) {
-                console.error("Error fetching users:", error);
-            }
-
+    const fetchUsers = async () => {
+        // console.log("param", params.userId);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/all-users/${params.userId}`);
+            setUsers(response.data);
+        } catch (error) {
+            console.log("Error fetching users:", error);
         }
+
+
+    }
+    useEffect(() => {
+
         fetchUsers();
-        // console.log("users", users)
-    }, []);
+    }, [adminView, nonAdminView]);
 
     // Separate Admin & Non-Admin Users
     const adminUsers = users.filter((user) => user.isAdmin);

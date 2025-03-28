@@ -86,7 +86,7 @@ const AdminDetails = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {shops.map((shop) => (
                     <div key={shop._id} className="bg-white shadow-md rounded-lg p-4">
-                        <img src={shop.imageUrls[1].url} alt={shop.shopname} className="w-full h-40 object-cover rounded-md" />
+                        <img src={shop.imageUrls[0].url} alt={shop.shopname} className="w-full h-40 object-cover rounded-md" />
                         <h3 className="text-lg font-bold mt-2">{shop.shopname}</h3>
                         <p className="text-gray-600">{shop.shoptype}</p>
                         <p className="text-gray-500 text-sm">📍 {shop.latitude}, {shop.longitude}</p>

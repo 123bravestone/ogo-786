@@ -21,7 +21,7 @@ router
      .post("/log-out", userLogOut)
      .get('/:id', getUser)
      .get("/list-items/:id", getUserListings)
-     .get("/all-users", getAllUsers)
+     .get("/all-users/:id", getAllUsers)
 
 
 router.post("/upload", upload.single("image"), uploadImage);

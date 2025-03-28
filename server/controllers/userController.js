@@ -211,9 +211,26 @@ export const getUserListings = async (req, res) => {
 // Get All users (GET) /api/user/all-users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().sort({ createdAt: -1 }); // Get latest users first
-    res.status(200).json(users);
+    const topAdmin = await User.findOne({ _id: req.params.id, topAdmin: true });
+    if (topAdmin) {
+      const users = await User.find().sort({ createdAt: -1 }); // Get latest users first
+      res.status(200).json(users);
+    } else {
+      return res.status(401).json("You can only view all users!");
+    }
+    // const users = await User.find().sort({ createdAt: -1 }); // Get latest users first
+    // res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching users", error });
   }
 };
+
+// Get All users (GET) /api/user/all-users
+// export const getAllUsersWithDetails = async (req, res) => {
+//   try {
+//     const users = await User.find().select("username email publicId imageUrl").sort({ createdAt: -1 }); // Get latest users first
+//     res.status(200).json(users);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching users", error });
+//   }
+// };
