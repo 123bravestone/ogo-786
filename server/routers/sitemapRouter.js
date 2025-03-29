@@ -16,8 +16,8 @@ router.get("/sitemap.xml", async (req, res) => {
 
         // Add static pages
         smStream.write({ url: "/", changefreq: "daily", priority: 1.0 });
-        smStream.write({ url: "/about", changefreq: "monthly", priority: 0.8 });
-        smStream.write({ url: "/contact", changefreq: "monthly", priority: 0.8 });
+        smStream.write({ url: "/auth-user", changefreq: "monthly", priority: 0.8 });
+        smStream.write({ url: "/price-user", changefreq: "monthly", priority: 0.8 });
 
         // Fetch dynamic listings from MongoDB
         const listings = await Listing.find();
