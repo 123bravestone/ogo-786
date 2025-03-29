@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import Image1 from '../assets/canvas_Image/1.png'
-import Image2 from '../assets/canvas_Image/2.png'
-import Image3 from '../assets/canvas_Image/3.png'
-import Image4 from '../assets/canvas_Image/4.png'
+import Image1 from '../assets/canvas_Image/1.avif'
+import Image2 from '../assets/canvas_Image/2.avif'
+import Image3 from '../assets/canvas_Image/3.avif'
+import Image4 from '../assets/canvas_Image/4.avif'
 import SearchBar from '../components/SearchBar';
 import ShopBox from '../components/Shopbox';
 import axios from 'axios';
@@ -208,7 +208,8 @@ const Home = () => {
                 className="w-full h-[full] bg-gray-100 flex overflow-hidden justify-center flex-shrink-0 ">
                 <img
                   src={img}
-                  alt="Food"
+                  alt="Hero section image"
+                  loading='lazy'
                   className='w-full h-full object-contain '
                 />
               </div>
