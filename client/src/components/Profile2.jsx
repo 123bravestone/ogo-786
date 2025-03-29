@@ -68,7 +68,7 @@ const ProfileUser = () => {
                     onClick={() => setBorderColor("border-yellow-500")} // Change border to yellow on click
                 >
                     {currentUser.imageUrl ? (
-                        <img src={currentUser.imageUrl} alt="Profile" className="w-full h-full object-cover" />
+                        <img src={currentUser.imageUrl} alt="Profile image" className="w-full h-full object-cover" loading='lazy' />
                     ) : (
                         <span className="text-gray-400 text-sm">Upload</span>
                     )}

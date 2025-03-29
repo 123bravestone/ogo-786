@@ -64,7 +64,7 @@ const ShopBox = ({ listing }) => {
                                     key={index}
 
                                     className="w-full h-[full] flex overflow-hidden justify-center flex-shrink-0 ">
-                                    <img key={index} src={image.url} alt="listingImg" className="w-full h-full object-cover rounded-[20px]" />
+                                    <img key={index} src={image.url} alt="Listing Image" loading='lazy' className="w-full h-full object-cover rounded-[20px]" />
                                 </div>
                             ))
                         )}

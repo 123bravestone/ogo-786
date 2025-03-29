@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -85,6 +85,8 @@ const PricingPage = () => {
         }
     };
 
+
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
 
@@ -92,7 +94,7 @@ const PricingPage = () => {
                 title="Affordable Listing Plans - Monthly & Yearly | OfflineGo"
                 description="Choose the best subscription plan for listing your shop on OfflineGo. Get more visibility with our monthly and yearly pricing options."
                 keywords="listing plans, shop subscription, monthly pricing, yearly subscription, OfflineGo pricing"
-                ogImage="https://offlinego.in/store.png"
+                ogImage="https://offlinego.in/store.avif"
                 url="https://offlinego.in/price-user"
             />
             {/* Language Toggle */}

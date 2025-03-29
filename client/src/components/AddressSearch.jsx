@@ -49,6 +49,7 @@ const AddressSearch = ({ setFormData, formData }) => {
         <div className="flex flex-col items-center justify-center  ">
             <div className="w-full max-w-md shadow-lg rounded-md">
                 {/* Search Box (Disabled, shows found location) */}
+                <label htmlFor="address">Address</label>
                 <input
                     type="text"
                     id="address"

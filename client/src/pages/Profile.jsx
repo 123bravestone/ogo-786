@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signInSuccess } from '../app/user/userSlice.js'
 import axios from "axios"
 import ProfileUser from "../components/Profile2.jsx";
-import DeleteAlert from "../components/DeleteAlert.jsx";
+import DeleteAlert from "../components/AlertBox/DeleteAlert.jsx";
 
 const Profile = () => {
 
@@ -230,7 +230,7 @@ const Profile = () => {
               the related details of their property:
 
             </p>
-            <p className="mt-2 text-sm">For any queries you can contact us:<strong className="text-slate-600 text-[16px] font-semibold"> +91 7667650665</strong></p>
+            <p className="mt-2 text-sm text-slate-600">For any queries you can contact us:<strong className=" text-[16px] font-semibold"> +91 7667650665</strong></p>
             <Link to="/create-listing">
               <p className=" bg-blue-600 p-3 rounded-lg text-white   mt-2 w-full font-semibold   text-center">
                 Create Listing
@@ -258,7 +258,8 @@ const Profile = () => {
                   <img
                     src={listing.imageUrls[0].url}
                     className="max-h-36 max-w-36  object-contain rounded-lg"
-                    alt="listingImage"
+                    alt="Listing Image"
+                    loading='lazy'
                   />
                 </Link>
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import Image1 from '../assets/canvas_Image/1.png'
-import Image2 from '../assets/canvas_Image/2.png'
-import Image3 from '../assets/canvas_Image/3.png'
-import Image4 from '../assets/canvas_Image/4.png'
+import Image1 from '../assets/canvas_Image/1.avif'
+import Image2 from '../assets/canvas_Image/2.avif'
+import Image3 from '../assets/canvas_Image/3.avif'
+import Image4 from '../assets/canvas_Image/4.avif'
 import SearchBar from '../components/SearchBar';
 import ShopBox from '../components/Shopbox';
 import axios from 'axios';
@@ -187,7 +187,7 @@ const Home = () => {
         title="OfflineGO - Offline Shopping & Find Shops Near You"
         description="Best local shopping platform to discover and shop from local stores with OfflineGo. Find amazing deals, support small businesses, and enjoy a better offline shopping experience."
         keywords="offline shopping, local stores, buy local, nearby shops"
-        ogImage="https://offlinego.in/store.png"
+        ogImage="https://offlinego.in/store.avif"
         url="https://offlinego.in"
       />
       <AddToHomeScreen />
@@ -212,6 +212,7 @@ const Home = () => {
                 <img
                   src={img}
                   alt="Food"
+                  loading='lazy'
                   className='w-full h-full object-contain '
                 />
               </div>
@@ -245,9 +246,9 @@ const Home = () => {
           <br />
         </h1>
         <div className="text-gray-500 text-sm sm:text-sm">
-          This place is helping you to find nearest shop
-          <br />
-          for you to offline shopping with best discount price and offers.
+          <p> This place is helping you to find nearest shop
+            <br />
+            for you to offline shopping with best discount price and offers.</p>
         </div>
 
         {/* <ScratchCard /> */}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUserShield, FaUsers } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import ProfileImg from "../assets/Profile.png";
+import ProfileImg from "../assets/Profile.avif";
 import { Bar } from "react-chartjs-2"; // Graph
 import "chart.js/auto";
 
@@ -122,7 +122,8 @@ const UserCard = ({ user }) => {
         <div className="bg-white shadow-md rounded-md p-3 flex items-center gap-4 mb-3">
             <img
                 src={user.imageUrl || ProfileImg}
-                alt="User"
+                alt="User Image"
+                loading='lazy'
                 className="w-12 h-12 rounded-full object-cover"
             />
             <div>

@@ -118,7 +118,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
             {selectedImages.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-2">
                     {selectedImages.map((img, index) => (
-                        <img key={index} src={URL.createObjectURL(img)} alt="Preview" className="w-24 h-24 object-cover rounded-md" />
+                        <img key={index} src={URL.createObjectURL(img)} alt="Preview Image" loading='lazy' className="w-24 h-24 object-cover rounded-md" />
                     ))}
                 </div>
             )}
@@ -144,7 +144,7 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
             <div className="mt-4 grid grid-cols-3 gap-4">
                 {formData.imageUrls.map((img, index) => (
                     <div key={index} className="relative">
-                        <img src={img.url} alt="Uploaded" className="w-24 h-24 object-cover rounded-md" />
+                        <img src={img.url} alt="Uploaded" loading='lazy' className="w-24 h-24 object-cover rounded-md" />
                         {
                             creating && (
                                 <button type="button" onClick={() => handleDelete(img.publicId, index)} className="absolute top-0 right-0 bg-red-300 hover:bg-red-600 text-gray-500 cursor-pointer hover:text-white p-1 rounded-[20px]">

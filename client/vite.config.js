@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': env, // Load environment variables
     },
+    build: {
+      minify: 'esbuild', // Minifies JavaScript
+    },
   };
 
 })

@@ -305,7 +305,7 @@ export const getAllShops = async (req, res) => {
 // Delete Shop (get) /api/listing/delete/:id
 export const deleteShop = async (req, res) => {
     try {
-        await Shop.findByIdAndDelete(req.params.id);
+        await Listing.findByIdAndDelete(req.params.id);
         res.json({ message: "Shop deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: "Error deleting shop" });

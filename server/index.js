@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from "cors"
+import compression from 'compression'
 import mongoose from 'mongoose'
 import userRouter from './routers/userRouter.js'
 import listingRouter from './routers/listingRouter.js'
@@ -20,6 +21,8 @@ const app = express()
 
 
 app.use(express.json())
+
+app.use(compression())
 
 app.use('/api/user', userRouter)
 app.use('/api/listing', listingRouter)

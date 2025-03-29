@@ -9,6 +9,8 @@ const PriceRequest = () => {
     const [showStats, setShowStats] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [userSubscriptions, setUserSubscriptions] = useState([]);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [ID, setID] = useState('');
 
     const params = useParams();
 
@@ -42,11 +44,13 @@ const PriceRequest = () => {
         }
     };
 
-    const deleteRequest = async (id) => {
+    const handleDeleteRequest = async () => {
         try {
-            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/main/user-request/delete/${id}/${params.userId} `);
+            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/main/user-request/delete/${ID}/${params.userId} `);
+            setIsAlertOpen(false);
             fetchRequests();
         } catch (err) {
+            setIsAlertOpen(false);
             console.error(err);
         }
     };
@@ -208,10 +212,26 @@ const PriceRequest = () => {
                                         )}
                                         <button
                                             className="bg-red-500 text-white px-3 py-1 cursor-pointer rounded-md"
-                                            onClick={() => deleteRequest(req._id)}
+                                            onClick={() => {
+                                                setID(req._id);
+                                                setIsAlertOpen(true);
+                                            }}
                                         >
                                             ❌ Delete
                                         </button>
+                                        {/* Alert Box */}
+                                        {isAlertOpen && (
+                                            <DeleteByTopAdmin
+                                                onClose={() => setIsAlertOpen(false)}
+                                                onDelete={handleDeleteRequest}
+                                            />
+                                        )}
+                                        {/* <button
+                                            className="bg-red-500 text-white px-3 py-1 cursor-pointer rounded-md"
+                                            onClick={() => deleteRequest(req._id)}
+                                        >
+                                            ❌ Delete
+                                        </button> */}
                                     </div>
                                 </div>
                             ))

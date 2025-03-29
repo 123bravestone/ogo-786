@@ -238,6 +238,12 @@ export default function Listing() {
                 <WhatsAppButton latitude={listing.latitude} longitude={listing.longitude} phoneNumber={listing.whatsAppNo} />
               </div>
 
+              {currentUser && currentUser._id === listing.userRef && (
+                <div className="flex items-center justify-center bg-blue-200 rounded-[20px] gap-4 mt-4">
+                  <p className="my-2 text-[16px] text-slate-600 ">For any queries you can contact us:<strong className=" text-[16px] font-semibold"> +91 7667650665</strong></p>
+                </div>
+              )}
+
               {/* {currentUser && (
                   listing.useRef !== currentUser._id && !contact && (
                     <button onClick={() => setContact(true)} className='bg-slate-700 text-white p-3 capitalize font-semibold tracking-widest rounded-lg'>
