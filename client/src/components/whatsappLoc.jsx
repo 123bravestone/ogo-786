@@ -10,7 +10,8 @@ const WhatsAppButton = ({ listingID, phoneNumber, latitude, longitude, home }) =
     const message = "Hello! I would like to inquire about your services."; // Default message
 
     const openWhatsApp = () => {
-        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        const numberW = '+91' + phoneNumber;
+        const url = `https://wa.me/${numberW}?text=${encodeURIComponent(message)}`;
         window.open(url, "_blank");
     };
 
