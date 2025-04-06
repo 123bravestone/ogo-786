@@ -31,7 +31,7 @@ export default function Listing() {
   const [remainingMonths, setRemainingMonths] = useState(null);
 
   // const [contact, setContact] = useState(false);
-  const { currentUser } = useSelector((state) => state.user);
+  const { loginUser } = useSelector((state) => state.user2);
 
 
   const fetchExpiredDate = async (listing) => {
@@ -62,7 +62,7 @@ export default function Listing() {
 
       // console.log("remainingDays", daysLeft);
       if (listing.isExpired === false && daysLeft <= 0) {
-        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/expire-listing/${listing._id}`)
+        // await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/expire-listing/${listing._id}`)
       }
       // console.log("remainingDays1");
     } catch (error) {
@@ -79,12 +79,12 @@ export default function Listing() {
       try {
 
         setLoading(true);
-        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get-listing/${params.listingId}`).then(async (res) => {
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/get-listing/${params.listingId}`).then(async (res) => {
           if (res.data) {
             setListing(res.data);
-            // console.log(res.data.userRef === currentUser._id);
+            // console.log(res.data.userRef === loginUser._id);
             // console.log(res.data);
-            if (currentUser._id === res.data.userRef) {
+            if (loginUser._id === res.data.userRef) {
               fetchExpiredDate(res.data);
             }
           }
@@ -133,7 +133,7 @@ export default function Listing() {
               ))}
             </Swiper>
 
-            {currentUser?._id === listing.userRef && (
+            {/* {loginUser?._id === listing.userRef && (
               listing.isExpired === false && remainingDays !== null ? (
                 <p className="text-white bg-blue-500 font-semibold p-2 text-center ">
                   {remainingMonths > 0
@@ -143,7 +143,8 @@ export default function Listing() {
               ) : (
                 <p className="text-white font-bold bg-red-500 p-2 text-center">No Plan Exist</p>
               )
-            )}
+            )} */}
+            <p className="text-white font-bold bg-blue-500 p-2 text-center">Free 2 months Plan</p>
 
             <div className='flex flex-col max-w-4xl mx-auto p-3 '>
 
@@ -152,7 +153,7 @@ export default function Listing() {
                   <FaHouseUser size={24} color='blue' />
                   {listing.shopname}
                 </p>
-                {currentUser?._id === listing.userRef ? (
+                {loginUser?._id === listing.userRef ? (
                   <div className="flex items-center justify-baseline gap-2">
                     {/* <span className="bg-green-100 text-green-600 font-bold text-sm px-4 py-1 rounded-md">Owner</span> */}
                     <ShopToggle listingId={listing._id} />
@@ -235,17 +236,17 @@ export default function Listing() {
                 {/* <Link to="/" className='bg-emerald-700 text-white p-3 capitalize rounded-lg font-semibold'>
                   Contact Seller
                 </Link> */}
-                <WhatsAppButton latitude={listing.latitude} longitude={listing.longitude} phoneNumber={listing.whatsAppNo} />
+                <WhatsAppButton latitude={listing.location.coordinates[1]} longitude={listing.location.coordinates[0]} listingID={listing._id} phoneNumber={listing.whatsAppNo} />
               </div>
 
-              {currentUser && currentUser._id === listing.userRef && (
+              {loginUser && loginUser._id === listing.userRef && (
                 <div className="flex items-center justify-center bg-blue-200 rounded-[20px] gap-4 mt-4">
                   <p className="my-2 text-[16px] text-slate-600 ">For any queries you can contact us:<strong className=" text-[16px] font-semibold"> +91 7667650665</strong></p>
                 </div>
               )}
 
-              {/* {currentUser && (
-                  listing.useRef !== currentUser._id && !contact && (
+              {/* {loginUser && (
+                  listing.useRef !== loginUser._id && !contact && (
                     <button onClick={() => setContact(true)} className='bg-slate-700 text-white p-3 capitalize font-semibold tracking-widest rounded-lg'>
                       Message Landlord
                     </button>

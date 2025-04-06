@@ -28,17 +28,32 @@ const listingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        latitude: {
-            type: String,
-            required: true,
+        location: {
+            type: {
+                type: String,
+                enum: ['Point'],
+                required: true
+            },
+            coordinates: {
+                type: [Number],
+                required: true
+            }
         },
-        longitude: {
-            type: String,
-            required: true,
-        },
+        // coordinates: {
+        //     type: [Number], // [longitude, latitude]
+        //     index: "2dsphere", // Creates GeoSpatial Index
+        // },
+        // latitude: {
+        //     type: String,
+        //     required: true,
+        // },
+        // longitude: {
+        //     type: String,
+        //     required: true,
+        // },
         discountOffer: {
             type: String,
-            required: true,
+            required: false,
         },
         closeTime: {
             type: Number,
@@ -67,7 +82,7 @@ const listingSchema = new mongoose.Schema(
         // },
         offer: {
             type: Boolean,
-            required: true,
+            required: false,
 
         },
         closeReason: {
@@ -107,6 +122,8 @@ const listingSchema = new mongoose.Schema(
 
     }, { timestamps: true }
 )
+// Add 2dsphere index for geo queries
+listingSchema.index({ location: "2dsphere" });
 
 const Listing = mongoose.model("Listing", listingSchema);
 

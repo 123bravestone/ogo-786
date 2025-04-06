@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess } from "../app/user/userSlice";
+import { loginSet, userListingSet } from "../app/user/user2Slice";
 
 
 const ProfileUser = () => {
@@ -12,10 +13,14 @@ const ProfileUser = () => {
     const [borderColor, setBorderColor] = useState("border-gray-300"); // Default border color
     const [successMessage, setSuccessMessage] = useState("");
 
-    const { currentUser } = useSelector((state) => state.user);
+    // const { currentUser } = useSelector((state) => state.user);
+    const { loginUser } = useSelector((state) => state.user2);
     const dispatchEvent = useDispatch();
 
 
+    // useEffect(() => {
+    //     dispatchEvent(userListingSet(null))
+    // }, [])
     // Handle Image Upload
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
@@ -30,12 +35,13 @@ const ProfileUser = () => {
         setSuccessMessage(""); // Reset success message
         setBorderColor("border-yellow-500"); // Change
         const formData = new FormData();
-        formData.append("_id", currentUser._id);
+        // formData.append("_id", currentUser._id);
+        formData.append("_id", loginUser._id);
         formData.append("image", file);
         // formData.append("oldPublicId", currentUser.publicId);
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/upload`, formData, {
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/users/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
 
@@ -43,7 +49,8 @@ const ProfileUser = () => {
                 },
             });
 
-            dispatchEvent(signInSuccess(response.data))
+            // dispatchEvent(signInSuccess(response.data))
+            dispatchEvent(loginSet(response.data))
 
             // setImageUrl(response.data.imageUrl);
             // setPublicId(response.data.publicId);
@@ -67,8 +74,8 @@ const ProfileUser = () => {
                     className={`w-24 h-24 rounded-full border-4 ${borderColor} flex items-center justify-center overflow-hidden transition-all duration-300`}
                     onClick={() => setBorderColor("border-yellow-500")} // Change border to yellow on click
                 >
-                    {currentUser.imageUrl ? (
-                        <img src={currentUser.imageUrl} alt="Profile image" className="w-full h-full object-cover" loading='lazy' />
+                    {loginUser.imageUrl ? (
+                        <img src={loginUser.imageUrl} alt="Profile image" className="w-full h-full object-cover" loading='lazy' />
                     ) : (
                         <span className="text-gray-400 text-sm">Upload</span>
                     )}

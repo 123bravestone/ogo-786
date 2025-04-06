@@ -1,0 +1,462 @@
+[
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.1554626,
+        25.5813308
+      ]
+    },
+    "_id": "67e6d7a8b49dc0e9c8a4280c",
+    "shopname": "Sagar Kirana Store",
+    "shoptype": "Kirana Store",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "quality product available here for my customer",
+    "address": "Patna Central School Rd, New Jaganpura, East Lakshmi Nagar, Chowk, Patna, Bihar 800027",
+    "discountOffer": "₹20 cashback on order above ₹250 ",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743184054/listing_images/ulha0emvxra1156z4muf.jpg",
+        "publicId": "listing_images/ulha0emvxra1156z4muf"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743184054/listing_images/osrcuajrs6ns6hmsi6ft.jpg",
+        "publicId": "listing_images/osrcuajrs6ns6hmsi6ft"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743184054/listing_images/jn1kg0xxhp7ivp338vvd.jpg",
+        "publicId": "listing_images/jn1kg0xxhp7ivp338vvd"
+      }
+    ],
+    "userRef": "67e6d3379f04fc1723a19245",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T17:08:56.577Z",
+    "createdAt": "2025-03-28T17:08:56.578Z",
+    "updatedAt": "2025-03-28T17:47:40.597Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.0494391,
+        25.5698927
+      ]
+    },
+    "_id": "67e6e636b49dc0e9c8a42865",
+    "shopname": "Golu Kirana Store",
+    "shoptype": "Kirana Store",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "Good quality ration items available",
+    "address": "Rd Number 1, Vrindavan Colony, Khagaul, Patna, Bihar 801505",
+    "discountOffer": "not available",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191120/listing_images/jmigm3saz7djmkmtir6f.jpg",
+        "publicId": "listing_images/jmigm3saz7djmkmtir6f"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191120/listing_images/k1f6omt2q35hmrmsqxc3.jpg",
+        "publicId": "listing_images/k1f6omt2q35hmrmsqxc3"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191121/listing_images/dbiaroqx75ftw374a1jr.jpg",
+        "publicId": "listing_images/dbiaroqx75ftw374a1jr"
+      }
+    ],
+    "userRef": "67e6e4e4b49dc0e9c8a4284b",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T18:11:02.244Z",
+    "createdAt": "2025-03-28T18:11:02.245Z",
+    "updatedAt": "2025-03-28T19:45:23.056Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.1378369,
+        25.6051747
+      ]
+    },
+    "_id": "67e6e8b8b49dc0e9c8a42891",
+    "shopname": "Patna Kiranaa",
+    "shoptype": "Grocery Mart",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "home kitchen products for best price",
+    "address": "Station Rd, Budh Vihar, Fraser Road Area, Patna, Bihar 800001",
+    "discountOffer": "not available",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191278/listing_images/rydejzkucxkb7vyzujk7.jpg",
+        "publicId": "listing_images/rydejzkucxkb7vyzujk7"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191277/listing_images/uwvsa8lsczy5xqdasl9f.jpg",
+        "publicId": "listing_images/uwvsa8lsczy5xqdasl9f"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743191277/listing_images/i80so408o10yf2wyjz3u.jpg",
+        "publicId": "listing_images/i80so408o10yf2wyjz3u"
+      }
+    ],
+    "userRef": "67e6e788b49dc0e9c8a42879",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T18:21:44.268Z",
+    "createdAt": "2025-03-28T18:21:44.268Z",
+    "updatedAt": "2025-03-28T19:48:01.006Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.063923,
+        25.605856
+      ]
+    },
+    "_id": "67e6ecdeb49dc0e9c8a428ed",
+    "shopname": "Vishwanath Kirana & General Store",
+    "shoptype": "Kirana Store",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "old kirana store with quality items",
+    "address": "Sri Ram Plaza, New Market Station Rd, Budh Vihar, Fraser Road Area, Patna, Bihar 800001",
+    "discountOffer": "not available",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192003/listing_images/wwbympymsnucxonynv8h.jpg",
+        "publicId": "listing_images/wwbympymsnucxonynv8h"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192004/listing_images/z2fuxo4n6rj4sp9mwwjg.jpg",
+        "publicId": "listing_images/z2fuxo4n6rj4sp9mwwjg"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192003/listing_images/oee8divis83nr0raxfgh.jpg",
+        "publicId": "listing_images/oee8divis83nr0raxfgh"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192003/listing_images/o2placjcjj1gqts0vysd.jpg",
+        "publicId": "listing_images/o2placjcjj1gqts0vysd"
+      }
+    ],
+    "userRef": "67e6ebd4b49dc0e9c8a428d7",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T18:39:26.569Z",
+    "createdAt": "2025-03-28T18:39:26.569Z",
+    "updatedAt": "2025-03-28T20:00:09.437Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.1199379,
+        25.6080151
+      ]
+    },
+    "_id": "67e6eeb0b49dc0e9c8a4290c",
+    "shopname": "Baba Kirana Store",
+    "shoptype": "Kirana Store",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "my shop for household essentials",
+    "address": "Abhishek Plaza, Exhibition Rd, Budh Vihar, Fraser Road Area, Patna, Bihar 800001",
+    "discountOffer": "not available",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192167/listing_images/sxbssnxlcrcdttmkywjk.jpg",
+        "publicId": "listing_images/sxbssnxlcrcdttmkywjk"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192167/listing_images/awdsonhwtaozhsxblvgb.jpg",
+        "publicId": "listing_images/awdsonhwtaozhsxblvgb"
+      }
+    ],
+    "userRef": "67e6ecedb49dc0e9c8a428f4",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T18:47:12.018Z",
+    "createdAt": "2025-03-28T18:47:12.018Z",
+    "updatedAt": "2025-03-28T20:02:50.676Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.1215789,
+        25.5982968
+      ]
+    },
+    "_id": "67e6f0eeb49dc0e9c8a42947",
+    "shopname": "Daily Needs Super Market",
+    "shoptype": "Supermarket",
+    "isExpired": false,
+    "whatsAppNo": 7667650665,
+    "description": "customers daily needs product available here",
+    "address": "Kankarbagh Colony More, Khasmahal, Mithapur, Patna, Bihar 800020",
+    "discountOffer": "not available",
+    "closeTime": 9,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192528/listing_images/bhnrjj53kq391tz391yv.jpg",
+        "publicId": "listing_images/bhnrjj53kq391tz391yv"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192528/listing_images/t0cphvgrsr4bqhascnt1.jpg",
+        "publicId": "listing_images/t0cphvgrsr4bqhascnt1"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743192528/listing_images/surwqbrfic5cudpkpdds.jpg",
+        "publicId": "listing_images/surwqbrfic5cudpkpdds"
+      }
+    ],
+    "userRef": "67e6f046b49dc0e9c8a42931",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-28T18:56:46.348Z",
+    "createdAt": "2025-03-28T18:56:46.348Z",
+    "updatedAt": "2025-03-28T20:08:52.178Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.071243,
+        25.577451
+      ]
+    },
+    "_id": "67e79a0fb49dc0e9c8a42a5b",
+    "shopname": "Ali Fashion",
+    "shoptype": "Clothing",
+    "isExpired": false,
+    "whatsAppNo": 8789770985,
+    "description": "all trending fashion cloth for men",
+    "address": "Phulwaribazar Road, Phulwari, पटना जिला, Bihar, 801505, India",
+    "discountOffer": "no offers available",
+    "closeTime": 8,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "बीस मिनट बाद खोलेंगे",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743231490/listing_images/wqx8spfaubhnokcpuhty.jpg",
+        "publicId": "listing_images/wqx8spfaubhnokcpuhty"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743231490/listing_images/imb9hkzvlnbhlie0xkyd.jpg",
+        "publicId": "listing_images/imb9hkzvlnbhlie0xkyd"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743231490/listing_images/egyyqicrg9jinys6s189.jpg",
+        "publicId": "listing_images/egyyqicrg9jinys6s189"
+      }
+    ],
+    "userRef": "67e7990eb49dc0e9c8a42a41",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-29T06:58:23.649Z",
+    "createdAt": "2025-03-29T06:58:23.650Z",
+    "updatedAt": "2025-03-29T06:59:32.532Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.07027,
+        25.57789
+      ]
+    },
+    "_id": "67e7a279b49dc0e9c8a42ae2",
+    "shopname": "Jade Blue Store ",
+    "shoptype": "Clothing",
+    "isExpired": false,
+    "whatsAppNo": 9263499135,
+    "description": "Trending fashion items for men customers ",
+    "address": "S.A.MANZIL, NH139, Phulwari, Patna, Bihar, 801505, India",
+    "discountOffer": "no offers available ",
+    "closeTime": 10,
+    "openTime": 10,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "बीस मिनट बाद खोलेंगे",
+    "isOpen": false,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743233632/listing_images/pqwkwendpjdhzik0oyfx.jpg",
+        "publicId": "listing_images/pqwkwendpjdhzik0oyfx"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743233632/listing_images/thuco9lbwnk9rjy5epfa.jpg",
+        "publicId": "listing_images/thuco9lbwnk9rjy5epfa"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743233632/listing_images/tntlb81hemiisurgeln1.jpg",
+        "publicId": "listing_images/tntlb81hemiisurgeln1"
+      }
+    ],
+    "userRef": "67e7a0c8b49dc0e9c8a42acc",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-29T07:34:17.999Z",
+    "createdAt": "2025-03-29T07:34:18.000Z",
+    "updatedAt": "2025-03-31T02:13:40.400Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.069833,
+        25.576838
+      ]
+    },
+    "_id": "67e7a73cb49dc0e9c8a42b22",
+    "shopname": "Paint house ",
+    "shoptype": "Paint shop",
+    "isExpired": false,
+    "whatsAppNo": 9525934633,
+    "description": "The paint and paint material shop ag your nearest location ",
+    "address": "Near chappan bhog Khagaul road nh 98 Phulwari, Patna, Bihar, 801505, India",
+    "discountOffer": "No ",
+    "closeTime": 8,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "बीस मिनट बाद खोलेंगे",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743234855/listing_images/nlx1kbfsohlutm9z00la.jpg",
+        "publicId": "listing_images/nlx1kbfsohlutm9z00la"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743234854/listing_images/ulowv1ezg04exjzzo5c9.jpg",
+        "publicId": "listing_images/ulowv1ezg04exjzzo5c9"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743234854/listing_images/jlklhmyl1cycyuurfb0k.jpg",
+        "publicId": "listing_images/jlklhmyl1cycyuurfb0k"
+      }
+    ],
+    "userRef": "67e7a560b49dc0e9c8a42b0c",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-29T07:54:36.367Z",
+    "createdAt": "2025-03-29T07:54:36.368Z",
+    "updatedAt": "2025-03-29T07:54:53.941Z",
+    "__v": 0
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        85.069342,
+        25.577524
+      ]
+    },
+    "_id": "67e7a9ddb49dc0e9c8a42b4c",
+    "shopname": "Smart Bags",
+    "shoptype": "Bags Store",
+    "isExpired": false,
+    "whatsAppNo": 7870723011,
+    "description": "All types of bags for our customers ",
+    "address": "near Chhappan bhog Phulwari, Patna, Bihar, 801505, India",
+    "discountOffer": "no offers ",
+    "closeTime": 8,
+    "openTime": 9,
+    "ctime": "PM",
+    "otime": "AM",
+    "offer": true,
+    "closeReason": "बीस मिनट बाद खोलेंगे",
+    "isOpen": true,
+    "imageUrls": [
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743235543/listing_images/orpmqn4p7vyugorjtktn.jpg",
+        "publicId": "listing_images/orpmqn4p7vyugorjtktn"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743235544/listing_images/mmwyts2qcdvrl9wtx1pi.jpg",
+        "publicId": "listing_images/mmwyts2qcdvrl9wtx1pi"
+      },
+      {
+        "url": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743235544/listing_images/djg4q7j4yp0goxes7b9c.jpg",
+        "publicId": "listing_images/djg4q7j4yp0goxes7b9c"
+      }
+    ],
+    "userRef": "67e7a7f4b49dc0e9c8a42b2f",
+    "reviews": [],
+    "customers": [],
+    "planType": "1 month",
+    "listingTime": "2025-03-29T08:05:49.660Z",
+    "createdAt": "2025-03-29T08:05:49.660Z",
+    "updatedAt": "2025-03-29T08:06:34.350Z",
+    "__v": 0
+  }
+]

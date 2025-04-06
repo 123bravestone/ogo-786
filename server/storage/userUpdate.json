@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "67efe120f5871c0da87ae531",
+    "username": "Najam",
+    "mobileNum": "7667650665",
+    "otp": 31906,
+    "shopsId": [],
+    "isAdmin": false,
+    "topAdmin": false,
+    "imageUrl": "https://res.cloudinary.com/dd4nwt8e3/image/upload/v1743876740/user_profiles/zee3dg8wjcndsaj4ufxa.png",
+    "publicId": "user_profiles/zee3dg8wjcndsaj4ufxa",
+    "email": "@gmail.com"
+  }
+]

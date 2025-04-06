@@ -22,7 +22,7 @@ const AdminDetails = () => {
 
     const fetchShops = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/shops`);
+            const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/shops`);
             setShops(res.data);
             processStatistics(res.data);
         } catch (error) {
@@ -42,7 +42,7 @@ const AdminDetails = () => {
 
     const handleDeleteShop = async () => {
         try {
-            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-shop/${ID}`);
+            await axios.delete(`${import.meta.env.VITE_APP_API_URL}/api/listings/delete-shop/${ID}`);
 
             const updatedShops = shops.filter((shop) => shop._id !== ID);
             setShops(updatedShops);

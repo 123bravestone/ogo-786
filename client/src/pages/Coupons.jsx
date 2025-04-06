@@ -38,7 +38,7 @@ const Coupons = () => {
 
   // const [shops, setShops] = useState([]);
 
-  const { currentUser } = useSelector((state) => state.user);
+  const { loginUser } = useSelector((state) => state.user2);
 
 
 
@@ -49,7 +49,7 @@ const Coupons = () => {
   //     if (shops.length > 0) {
 
   //       // console.log("work", lenShop)
-  //       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/allshop/add-shops-code`, { allShop: shops, userRef: currentUser._id }).then(async (res) => {
+  //       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/allshop/add-shops-code`, { allShop: shops, userRef: loginUser._id }).then(async (res) => {
   //         if (res.data) {
   //           // console.log(res.data)
   //           dispatchEvent(userCodeSet(res.data))
@@ -68,7 +68,7 @@ const Coupons = () => {
   //   const fetchData = async () => {
 
   //     // console.log("working", shops.length, lenShop, arrShop.length)
-  //     await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/allshop/get-shops-code/${currentUser._id}`).then(async (res) => {
+  //     await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/allshop/get-shops-code/${loginUser._id}`).then(async (res) => {
   //       if (res.data.length > 0 && res.data.length === arrShop.length) {
   //         dispatchEvent(userCodeSet(res.data))
   //         // console.log("work", lenShop)
@@ -103,7 +103,7 @@ const Coupons = () => {
         <p className='text-white font-bold text-[20px] '>
           Referral code:
         </p>
-        <p className='text-white font-bold text-[20px] '>{currentUser._id.slice(-6).toString().toUpperCase()}</p>
+        <p className='text-white font-bold text-[20px] '>{loginUser._id.slice(-6).toString().toUpperCase()}</p>
       </div>
       <div className=" grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-center gap-6 overflow-x-scroll no-scrollbar">
         {/* {

@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { signInSuccess } from '../app/user/userSlice.js'
 import axios from "axios"
 import ProfileUser from "../components/Profile2.jsx";
 import DeleteAlert from "../components/AlertBox/DeleteAlert.jsx";
+import { loginSet, logoutSet, userListingSet } from "../app/user/user2Slice.js";
 
 const Profile = () => {
 
-  const { currentUser, imageOld } = useSelector((state) => state.user);
+  const { loginUser, userListing } = useSelector((state) => state.user2);
   const dispatchEvent = useDispatch();
   const navegate = useNavigate();
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(loginUser);
 
-  const [userListing, setUserListing] = useState([]);
+  // const [userListing, setUserListing] = useState([]);
   const [showListingError, setShowListingError] = useState(false);
   const [flag, setFlag] = useState(false);
 
@@ -41,7 +41,7 @@ const Profile = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      _id: currentUser._id,
+      _id: loginUser._id,
       [e.target.id]: e.target.value
     });
   };
@@ -52,11 +52,11 @@ const Profile = () => {
     setLoading(true);
     try {
 
-      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/update/${currentUser._id}`,
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/users/update/${loginUser._id}`,
         formData
       ).then(async (response) => {
         if (response.data) {
-          dispatchEvent(signInSuccess(response.data))
+          dispatchEvent(loginSet(response.data))
           setLoading(false);
           setError("");
           setUpdateSuccess(true);
@@ -75,20 +75,13 @@ const Profile = () => {
     }
   };
 
-  const handleSignOut = async () => {
+  const handleSignOut = () => {
     try {
 
-      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/user/log-out`, {
-        _id: currentUser._id
-      }).then(async (res) => {
-        if (res.data) {
-          dispatchEvent(signInSuccess())
-          navegate("/auth-user", { replace: true });
-        } else {
-          setError("Something went wrong! User still Login")
-        }
-
-      })
+      dispatchEvent(logoutSet())
+      dispatchEvent(userListingSet())
+      dispatchEvent(loginSet())
+      navegate("/auth-user", { replace: true });
 
 
 
@@ -99,34 +92,14 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    handleShowListing();
-  }, [])
-  const handleShowListing = async () => {
-    try {
 
-      await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/list-items/${currentUser._id}`).then(async (res) => {
-        if (res.data) {
-          setUserListing(res.data);
-          setShowListingError(false);
-          setFlag(true);
-        } else {
-          setFlag(true);
-        }
-      });
-
-
-    } catch (error) {
-      setShowListingError(true);
-    }
-  };
 
   //Delete Listing Item Function
 
   const handleDeleteConfirm = async (listindId) => {
     try {
       setDeletElement(true)
-      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-list-item/${listindId}`, { _id: currentUser._id }).then(async (res) => {
+      await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-list-item/${listindId}`, { _id: loginUser._id }).then(async (res) => {
         if (res.data) {
           setDeletElement(false)
           setUserListing((prev) =>
@@ -144,10 +117,10 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("work", typeof currentUser.topAdmin)
+  // useEffect(() => {
+  //   console.log("work", typeof loginUser.topAdmin)
 
-  }, [])
+  // }, [])
 
 
   return (
@@ -157,14 +130,14 @@ const Profile = () => {
 
         <ProfileUser />
         <label htmlFor="username" className="text-gray-700">UserID:</label>
-        <p className="border p-3 rounded-lg">#{currentUser._id}</p>
+        <p className="border p-3 rounded-lg">#{loginUser._id}</p>
 
         <label htmlFor="username" className="text-gray-700">Username</label>
         <input
           className="border p-3 rounded-lg"
           type="text"
           placeholder="username"
-          defaultValue={currentUser.username}
+          defaultValue={loginUser.username}
           id="username"
           onChange={handleChange}
         />
@@ -173,15 +146,15 @@ const Profile = () => {
           className="border p-3 rounded-lg"
           type="email"
           placeholder="email"
-          defaultValue={currentUser.username.toLowerCase() + currentUser.email.toLowerCase()}
-          // defaultValue={currentUser.username + currentUser.email}
+          // defaultValue={loginUser.username.toLowerCase() + loginUser.email.toLowerCase()}
+          defaultValue={loginUser.email}
           id="email"
           onChange={handleChange}
         />
         <label htmlFor="mobileNum" className="text-gray-700">Mobile Number</label>
         <p
           className="border p-3 rounded-lg"
-        >(+91) - {currentUser.mobileNum}</p>
+        >(+91) - {loginUser.mobileNum}</p>
 
 
         <button
@@ -201,28 +174,29 @@ const Profile = () => {
       </p>
 
       {/* Admin Section for Open Digital Shops */}
-      {currentUser && currentUser.topAdmin &&
+      {loginUser && loginUser.topAdmin &&
         <div className="flex flex-row items-center justify-between  gap-2  rounded-lg">
 
           <Link to="/admins-details" className=" bg-blue-700 p-3 rounded-lg text-white    w-full font-semibold   text-center">Admins Detail
 
           </Link>
-          <Link to={`/users-details/${currentUser._id}`} className=" bg-blue-700 p-3 rounded-lg text-white    w-full font-semibold   text-center">
+          <Link to={`/users-details/${loginUser._id}`} className=" bg-blue-700 p-3 rounded-lg text-white    w-full font-semibold   text-center">
             Users Detail
 
           </Link>
-          <Link to={`/users-request/${currentUser._id}`} className=" bg-blue-700 p-3 rounded-lg text-white    w-full font-semibold   text-center">
+          {/* <Link to={`/users-request/${loginUser._id}`} className=" bg-blue-700 p-3 rounded-lg text-white    w-full font-semibold   text-center">
             user Request
 
-          </Link>
+          </Link> */}
 
         </div>
       }
-      {currentUser &&
-        currentUser.isAdmin && (
+      {loginUser && (
 
 
-          userListing.length === 0 &&
+        userListing ? (
+          ""
+        ) :
           <div className="bg-slate-200 p-3 mt-2 rounded-lg">
             <p className="text-slate-600 font-bold">Open Digital Shops </p>
             <p className="mt-6 text-slate-500 text-sm">
@@ -238,75 +212,74 @@ const Profile = () => {
             </Link>
           </div>
 
-        )
+      )
       }
       <>
 
         {/* List your shop Images */}
-        {currentUser && userListing && userListing.length > 0 && (
+        {loginUser && userListing && (
           <div className="flex flex-col gap-4">
             <h1 className="text-center mt-4 text-2xl font-semibold">
               Your Shop Listing
             </h1>
 
-            {userListing.map((listing) => (
-              <div
-                key={listing._id}
-                className="border rounded-lg p-3 flex flex-col justify-center lg:flex-row lg:justify-between items-center gap-4"
-              >
-                <Link to={`/listing/${listing._id}`}>
-                  <img
-                    src={listing.imageUrls[0].url}
-                    className="max-h-36 max-w-36  object-contain rounded-lg"
-                    alt="Listing Image"
-                    loading='lazy'
-                  />
-                </Link>
 
-                <Link to={`/listing/${listing._id}`}>
-                  <p className="text-slate-700 w-40 font-semibold flex-1 text-center hover:underline truncate">
-                    {listing.shopname}
-                  </p>
-                </Link>
+            <div
 
-                {deleteElement ? (
-                  <p className="flex text-sm text-gray-500 ">Deleting....</p>) : (
-                  <div className="flex flex-row lg:flex-col gap-5 items-start ">
-                    <Link to={`/update-listing/${listing._id}`}>
-                      <button className="bg-green-100 hover:bg-green-500 border py-1 px-3 rounded-lg text-green-700 hover:text-white">
-                        Edit
-                      </button>
-                    </Link>
+              className="border rounded-lg p-3 flex flex-col justify-center lg:flex-row lg:justify-between items-center gap-4"
+            >
+              <Link to={`/listing/${userListing._id}`}>
+                <img
+                  src={userListing.imageUrls[0].url}
+                  className="max-h-36 max-w-36  object-contain rounded-lg"
+                  alt="Listing Image"
+                  loading='lazy'
+                />
+              </Link>
 
-                    <button
-                      onClick={() => handleDeleteClick(listing.shopname)}
-                      className=" bg-red-100 hover:bg-red-600 border py-1 px-3 rounded-lg text-red-700 hover:text-white"
-                    >
-                      Delete
+              <Link to={`/listing/${userListing._id}`}>
+                <p className="text-slate-700 w-40 font-semibold flex-1 text-center hover:underline truncate">
+                  {userListing.shopname}
+                </p>
+              </Link>
+
+              {deleteElement ? (
+                <p className="flex text-sm text-gray-500 ">Deleting....</p>) : (
+                <div className="flex flex-row lg:flex-col gap-5 items-start ">
+                  <Link to={`/update-listing/${userListing._id}`}>
+                    <button className="bg-green-100 hover:bg-green-500 border py-1 px-3 rounded-lg text-green-700 hover:text-white">
+                      Edit
                     </button>
+                  </Link>
 
-                    {/* Show Delete Alert */}
-                    {showAlert && selectedShop && (
-                      <DeleteAlert
-                        shopName={selectedShop}
-                        setDeletElement={setDeletElement}
-                        setUserListing={setUserListing}
-                        setError={setError}
-                        userID={currentUser._id}
-                        listingId={listing._id}
-                        onCancel={handleCancel}
-                      />
-                    )}
-                    {/* <button
+                  <button
+                    onClick={() => handleDeleteClick(userListing.shopname)}
+                    className=" bg-red-100 hover:bg-red-600 border py-1 px-3 rounded-lg text-red-700 hover:text-white"
+                  >
+                    Delete
+                  </button>
+
+                  {/* Show Delete Alert */}
+                  {showAlert && selectedShop && (
+                    <DeleteAlert
+                      shopName={selectedShop}
+                      setDeletElement={setDeletElement}
+                      setError={setError}
+                      userID={loginUser._id}
+                      listingId={userListing._id}
+                      onCancel={handleCancel}
+                    />
+                  )}
+                  {/* <button
                       onClick={() => handleListingDelete(listing._id)}
                       className=" bg-red-100 hover:bg-red-600 border py-1 px-3 rounded-lg text-red-700 hover:text-white"
                     >
                       Delete
                     </button> */}
-                  </div>
-                )}
-              </div>
-            ))}
+                </div>
+              )}
+            </div>
+
           </div>
         )}
       </>

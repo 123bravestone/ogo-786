@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUserShield, FaUsers } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ProfileImg from "../assets/Profile.avif";
 import { Bar } from "react-chartjs-2"; // Graph
@@ -11,13 +12,14 @@ const UsersDetail = () => {
     const [showGraph, setShowGraph] = useState(false);
     const [adminView, setAdminView] = useState(false);
     const [nonAdminView, setNonAdminView] = useState(true);
+    const { loginUser } = useSelector((state) => state.user2);
     const params = useParams();
 
     // Fetch Users from Backend
     const fetchUsers = async () => {
         // console.log("param", params.userId);
         try {
-            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/all-users/${params.userId}`);
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/users/all-users`, { topAdmin: loginUser.topAdmin });
             setUsers(response.data);
         } catch (error) {
             console.log("Error fetching users:", error);

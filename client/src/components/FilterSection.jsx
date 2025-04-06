@@ -5,12 +5,12 @@ import { RxCross2 } from "react-icons/rx";
 const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarData }) => {
     const [showOffers, setShowOffers] = useState(false);
     const [showShops, setShowShops] = useState(false);
-    const [selectedOffers, setSelectedOffers] = useState('');
+    const [selectedDis, setSelectedDis] = useState(0);
     const [selectedShops, setSelectedShops] = useState('');
 
     // const offers = ["10% Off", "5% Off", "15% Off"];
     // const discountOffers = ["10% Off", "5% Off", "15% Off", "20% Off"];
-    const discountOffers = ["10% Off", "15% Off", "20% Off", "buy 1 get 1", "upto 50%", "upto 60%", "upto 70%", "upto 75%", "₹20 cashback on order above ₹250 ", "₹200 Off", "₹300 Off", "₹400 Off", "₹500 Off"];
+    const distance = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const shopTypes = ["Clothing", "Supermarket", "Footware", "Grocery Mart", "Pharmacy", "Book", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories", "Mobile", "Hair Salon", "Others"];
 
     // useEffect(() => {
@@ -18,10 +18,11 @@ const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarDa
     // }, [selectedOffers]);
 
     const handleChange = (e) => {
-        if (e.target.id === "discountOffer") {
-            const value = e.target.value
-            setSelectedOffers(value)
-            setSidebarData((prevData) => ({ ...prevData, discountOffer: value.slice(0, 3) }))
+        if (e.target.id === "distance") {
+            const value = parseInt(e.target.value);
+            setSelectedDis(value);
+
+            setSidebarData((prevData) => ({ ...prevData, distance: value }))
 
 
         }
@@ -35,9 +36,9 @@ const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarDa
     }
 
     const handleClearFilter = () => {
-        setSelectedOffers('');
+        setSelectedDis(0);
         setSelectedShops('');
-        setSidebarData((prevData) => ({ ...prevData, discountOffer: selectedOffers, shoptype: selectedShops }))
+        setSidebarData((prevData) => ({ ...prevData, distance: 5, shoptype: selectedShops }))
     }
 
     return (
@@ -54,7 +55,7 @@ const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarDa
             <div className="space-y-2 p-4 ">
 
                 <div className="flex justify-between items-center">
-                    <p onClick={() => setShowOffers(!showOffers)} className={`w-full  border-b-[1px]  text-lg border-b-blue-500 text-blue-600 my-2 cursor-pointer`}>All Offers </p>
+                    <p onClick={() => setShowOffers(!showOffers)} className={`w-full  border-b-[1px]  text-lg border-b-blue-500 text-blue-600 my-2 cursor-pointer`}>User Distance </p>
                     {showOffers ? (
                         <FaAngleDown className="text-blue-600 " />
                     ) : (
@@ -64,9 +65,9 @@ const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarDa
                 </div>
 
                 {/* <input type="checkbox"  /> */}
-                {showOffers && discountOffers.map((offer, idx) => (
+                {showOffers && distance.map((dis, idx) => (
                     <label key={idx} className="block">
-                        <input type="checkbox" id="discountOffer" onChange={handleChange} value={offer} checked={selectedOffers === offer} /> {offer}
+                        <input type="checkbox" id="distance" onChange={handleChange} value={dis} checked={selectedDis === dis} /> {dis} km
                     </label>
                 ))}
 
@@ -74,7 +75,7 @@ const FilterSection = ({ handleOnFilter, showFilter, setFlag, flag, setSidebarDa
 
 
                 <div className="flex justify-between items-center">
-                    <p onClick={() => setShowShops(!showShops)} className={`w-full  border-b-[1px]  text-lg border-b-blue-500 text-blue-600 my-2 cursor-pointer`}>All Shops </p>
+                    <p onClick={() => setShowShops(!showShops)} className={`w-full  border-b-[1px]  text-lg border-b-blue-500 text-blue-600 my-2 cursor-pointer`}>Shop Type </p>
                     {showShops ? (
                         <FaAngleDown className="text-blue-600 " />
                     ) : (

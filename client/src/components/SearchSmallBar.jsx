@@ -3,13 +3,13 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { TbCurrentLocation, TbCurrentLocationOff } from "react-icons/tb";
-import { userLocationSet } from "../app/user/userSlice";
+import { userLocationSet } from "../app/user/user2Slice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 
 const shopNames = ["Clothing", "Supermarket", "Footware", "Grocery Mart", "Pharmacy", "Book", "Library", "Bakery", "Restaurant", "Cafe", "Fast Food", "Accessories", "Mobile", "Hair Salon", "Others"];
 
-const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) => {
+const SearchSmallBar = ({ setSidebarData, setListings, listings, setLoading, setDistance }) => {
     const [shop, setShop] = useState("");
     const [showResults, setShowResults] = useState(false);
     // const [userLocation, setUserLocation] = useState(null);
@@ -17,13 +17,18 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
     const [flag, setFlag] = useState(false);
 
     const navigate = useNavigate();
-    const { userLocation } = useSelector((state) => state.user);
+    const { userLocation } = useSelector((state) => state.user2);
     const dispatchEvent = useDispatch();
 
     // Filter and sort items based on search term
-    const filteredItems = shopNames
-        .filter((item) => item.toLowerCase().includes(shop.toLowerCase()))
+    const filteredShops = listings
+        .filter((item) => item.shopname.toLowerCase().includes(shop.toLowerCase()))
         .sort();
+
+    // useEffect(() => {
+    //     console.log("userLocation", listings)
+
+    // }, [])
 
     // Handle input change
     const handleChange = (e) => {
@@ -85,6 +90,7 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
                     const userLat = position.coords.latitude;
                     const userLon = position.coords.longitude;
                     dispatchEvent(userLocationSet({ lat: userLat, lon: userLon }));
+                    setSidebarData((prevData) => ({ ...prevData, coordinates: [userLat, userLon] }));
                     // setUserLocation({ lat: userLat, lon: userLon });
 
                     // Calculate the distance
@@ -97,10 +103,10 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
 
                     // console.log("working3")
                     for (let i = 0; i < listings.length; i++) {
-                        const listingLat = listings[i].latitude;
-                        const listingLon = listings[i].longitude;
+                        const listingLat = listings[i].location.coordinates[1];
+                        const listingLon = listings[i].location.coordinates[0];
                         const calculatedDistance = haversineDistance(userLat, userLon, listingLat, listingLon);
-                        setDistance((prevDistances) => [...prevDistances, { listingId: listings[i].id, distance: calculatedDistance }]);
+                        setDistance((prevDistances) => [...prevDistances, { listingId: listings[i]._id, distance: calculatedDistance }]);
 
                     }
                     setLoading(false);
@@ -140,11 +146,23 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
         if (userLocation === null) {
             setTimeout(() => {
                 getUserLocation();
-            }, 1000);
+            }, 2000);
         }
     }, []);
     // useEffect(() => {
     // }, []);
+
+    // Sort listings based on nearest distance
+    useEffect(() => {
+        if (userLocation) {
+            const sorted = [...listings].sort((a, b) => {
+                const distanceA = haversineDistance(userLocation.lat, userLocation.lon, a.location.coordinates[1], a.location.coordinates[0]);
+                const distanceB = haversineDistance(userLocation.lat, userLocation.lon, b.location.coordinates[1], b.location.coordinates[0]);
+                return distanceA - distanceB;
+            });
+            setListings(sorted);
+        }
+    }, [userLocation]);
 
     return (
 
@@ -179,15 +197,15 @@ const SearchSmallBar = ({ setSidebarData, listings, setLoading, setDistance }) =
                     /> */}
 
                     {/* Search Results - Show only if searchTerm exists */}
-                    {showResults && filteredItems.length > 0 && (
+                    {showResults && filteredShops.length > 0 && (
                         <div className=" absolute z-10 top-[80%]   mt-2 w-80 bg-white shadow-lg rounded-lg ">
-                            {filteredItems.map((item, index) => (
+                            {filteredShops.map((item, index) => (
                                 <p
                                     key={index}
-                                    onClick={() => handleSelect(item)}
+                                    onClick={() => handleSelect(item.shopname)}
                                     className="p-3 border-b last:border-none hover:bg-gray-200 cursor-pointer"
                                 >
-                                    {item}
+                                    {item.shopname}
                                 </p>
                             ))}
                         </div>

@@ -6,6 +6,8 @@ const LocationBox = ({ setFormData, formData }) => {
     const [longitude, setLongitude] = useState("");
     const [address, setAddress] = useState("");
     const [loading, setLoading] = useState(false);
+    const [flag1, setFlag1] = useState(false);
+    const [flag2, setFlag2] = useState(false);
     const [error, setError] = useState("");
 
     // Get User's Current Location
@@ -18,9 +20,13 @@ const LocationBox = ({ setFormData, formData }) => {
                 setLatitude(position.coords.latitude.toFixed(6));
                 setLongitude(position.coords.longitude.toFixed(6));
                 setLoading(false);
+
                 setFormData({
-                    ...formData, latitude: position.coords.latitude.toFixed(6), longitude: position.coords.longitude.toFixed(6), address: "",
-                });
+                    ...formData, location: { type: "Point", coordinates: [position.coords.longitude.toFixed(6), position.coords.latitude.toFixed(6)] }, address: "",
+                })
+                // setFormData({
+                //     ...formData, coordinates: [position.coords.latitude.toFixed(6), position.coords.longitude.toFixed(6)], address: "",
+                // })
                 setAddress("");
             },
             (error) => {
@@ -55,33 +61,37 @@ const LocationBox = ({ setFormData, formData }) => {
 
     return (
         <div className="max-w-md mx-auto p-6 rounded-lg shadow-lg bg-white">
-            <h2 className="text-lg font-semibold mb-4">Location Finder</h2>
+            <h2 className="text-lg font-semibold mb-4">Shop Location Finder</h2>
 
             {/* Latitude Input */}
-            <input
-                type="number"
-                className="w-full p-2 border border-blue-500 outline-none rounded mb-2"
-                placeholder="Latitude"
-                value={latitude}
-                onChange={(e) => {
-                    setLatitude(e.target.value);
-                    setFormData({ ...formData, latitude: e.target.value, address: "" })
-                }}
-                required
-            />
+            {formData.location && formData.location.coordinates.length > 0 && <>
+                <input
+                    type="number"
+                    className="w-full p-2 border border-blue-500 outline-none rounded mb-2"
+                    placeholder="Latitude"
+                    value={formData.location.coordinates[1]}
+                    // onChange={(e) => {
+                    //     setLatitude(e.target.value);
+                    //     setFormData({ ...formData, latitude: e.target.value, address: "" })
+                    // }}
+                    required
+                    readOnly
+                />
 
-            {/* Longitude Input */}
-            <input
-                type="number"
-                className="w-full p-2 border border-blue-500 outline-none rounded mb-2"
-                placeholder="Longitude"
-                value={longitude}
-                onChange={(e) => {
-                    setLongitude(e.target.value);
-                    setFormData({ ...formData, longitude: e.target.value, address: "" })
-                }}
-                required
-            />
+                {/* Longitude Input */}
+                <input
+                    type="number"
+                    className="w-full p-2 border border-blue-500 outline-none rounded mb-2"
+                    placeholder="Longitude"
+                    value={formData.location.coordinates[0]}
+                    // onChange={(e) => {
+                    //     setLongitude(e.target.value);
+                    //     setFormData({ ...formData, longitude: e.target.value, address: "" })
+                    // }}
+                    required
+                    readOnly
+                />
+            </>}
 
             {/* Get Current Location Button */}
             <button
@@ -94,7 +104,7 @@ const LocationBox = ({ setFormData, formData }) => {
             </button>
 
             {/* Address Input */}
-            <input
+            {formData.address && <input
                 type="text"
                 className="w-full p-2 border border-blue-500 outline-none rounded mb-2"
                 placeholder="Address"
@@ -106,7 +116,7 @@ const LocationBox = ({ setFormData, formData }) => {
                 }
                 }
                 required
-            />
+            />}
 
             {/* Add Address Button (Disabled if Lat/Lon is Empty) */}
             <button
@@ -118,7 +128,7 @@ const LocationBox = ({ setFormData, formData }) => {
                 onClick={fetchAddress}
                 disabled={!latitude || !longitude}
             >
-                {loading ? "Fetching Address..." : "Add Address"}
+                {loading ? "Fetching Address..." : "Find Address"}
             </button>
 
             {/* Error Message */}

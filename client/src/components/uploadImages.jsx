@@ -5,7 +5,7 @@ import Loader from "./Loader";
 
 const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
     const [selectedImages, setSelectedImages] = useState([]);
-    const [uploadedImages, setUploadedImages] = useState([]);
+    // const [uploadedImages, setUploadedImages] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [flag, setFlag] = useState(false);
     const [error, setError] = useState("");
@@ -56,13 +56,14 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
         });
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/upload`, imagesData, {
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/upload`, imagesData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: (progressEvent) => {
-                    const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                    setUploadProgress(percent);
+                    setUploadProgress(Math.round((progressEvent.loaded / progressEvent.total) * 100));
+
                     setFlag(true);
                     setUploading(true);
+
 
                 },
             });
@@ -131,11 +132,18 @@ const ImageUpload = ({ setUploading, setFormData, formData, creating }) => {
 
             )}
 
-            {uploadProgress > 0 && (
+            {/* {uploadProgress > 0 && (
                 <div className="mt-2 w-full bg-gray-200 rounded-md">
                     <div className="bg-green-500 text-xs text-center text-white p-1 rounded-md" style={{ width: `${uploadProgress} % ` }}>
                         {uploadProgress}%
                     </div>
+                </div>
+            )} */}
+
+            {uploadProgress > 0 && (
+                <div className="mt-2 w-34 h-2 bg-gray-300 rounded">
+
+                    <div className="h-full bg-green-500 rounded" style={{ width: `${uploadProgress}%` }}><span className="text-xs text-green-500">uploading{" "}{uploadProgress}%</span></div>
                 </div>
             )}
 

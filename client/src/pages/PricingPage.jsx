@@ -7,7 +7,7 @@ import SEO from "../components/SEO";
 const PricingPage = () => {
     // Language state (default: English)
     const [isEnglish, setIsEnglish] = useState(true);
-    const { currentUser } = useSelector((state) => state.user);
+    const { loginUser } = useSelector((state) => state.user2);
 
     const navigate = useNavigate();
 
@@ -62,12 +62,12 @@ const PricingPage = () => {
 
     const handlePricingRequest = async (pricing, planType, planName) => {
 
-        if (currentUser && currentUser._id) {
+        if (loginUser && loginUser._id) {
 
             // Implement your pricing request logic here
             // console.log("Pricing request submitted", price, planType, planName);
             try {
-                await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/main/pricing-request`, { userId: currentUser._id, userMobile: currentUser.mobileNum, userName: currentUser.username, pricing, planType, planName }).then(async (res) => {
+                await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/main/pricing-request`, { userId: loginUser._id, userMobile: loginUser.mobileNum, userName: loginUser.username, pricing, planType, planName }).then(async (res) => {
                     if (res.data) {
                         alert(res.data.message)
                         // console.log(res.data)

@@ -9,20 +9,20 @@ const ShopToggle = ({ listingId }) => {
 
     // List of reasons for closing
     const closeReasons = [
-        "बीस मिनट बाद खोलेंगे",
-        "व्यक्तिगत कारणों से कुछ समय के लिए बंद है।",
-        "लंच ब्रेक चल रहा है",
-        "त्योहार या विशेष अवकाश है।",
-        "दुकान का मेंटेनेंस कार्य चल रहा है।",
-        "जरूरी काम से बाहर गए हैं",
-        "छुट्टी का दिन है।",
-        "बिजली नहीं है।",
+        "20 मिनट बाद खुलेंगी।",
+        "15 मिनट बाद खुलेंगी।",
+        "10 मिनट बाद खुलेंगी।",
+        "5 मिनट बाद खुलेंगी।",
+        "2 घंटे के लिए बंद।",
+        "कल से खुलेगी",
+
+
     ];
 
     useEffect(() => {
         const fetchIsOpen = async () => {
             try {
-                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/open-shop/${listingId}`).then(async (response) => {
+                await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/is-open/${listingId}`).then(async (response) => {
                     setIsOpen(response.data.isOpen);
                     if (!response.data.isOpen) {
                         setSelectedReason(response.data.closeReason);
@@ -40,31 +40,38 @@ const ShopToggle = ({ listingId }) => {
     }, []);
 
     // Toggle shop status
-    const toggleShop = async () => {
+    const toggleShop = async (closeReason) => {
+        // if (isOpen) {
+        //     setSelectedReason(""); // Reset reason when reopening
+        //     setShowReasons(true); // Hide reason list after selecting
+        // }
+        // console.log("selectedReason", selectedReason);
 
-        try {
-            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/open-shop/${listingId}`, { closeReason: selectedReason }).then(async (response) => {
-                setIsOpen(response.data.isOpen);
-                if (!response.data.isOpen) {
-                    setSelectedReason(response.data.closeReason);
-                    setShowReasons(true); // Hide reason list after selecting
+        if (closeReason) {
+            setShowReasons(false);
+            try {
+                await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/open-verify/${listingId}`, { closeReason }).then(async (response) => {
+                    setIsOpen(response.data.isOpen);
+                    if (!response.data.isOpen) {
+                        setSelectedReason(response.data.closeReason);
+                        setShowReasons(false); // Hide reason list after selecting
 
-                } else {
-                    setSelectedReason("");
-                }
-            })
-        }
-        catch (err) {
-            console.log(err);
-            if (err.response.status === 400) {
-                alert(err.response.data.message);
+                    } else {
+                        setSelectedReason("");
+                    }
+                })
             }
+            catch (err) {
+                console.log(err);
+                if (err.response.status === 400) {
+                    alert(err.response.data.message);
+                }
+            }
+        } else {
+            setShowReasons(true);
         }
 
-        if (isOpen) {
-            setSelectedReason(""); // Reset reason when reopening
-            // setShowReasons(true); // Hide reason list after selecting
-        }
+
         // setIsOpen((prev) => !prev);
     };
 
@@ -82,7 +89,7 @@ const ShopToggle = ({ listingId }) => {
                 <div
                     className={`relative w-20 h-10 flex items-center rounded-full p-1 cursor-pointer transition-all duration-300 mx-auto ${isOpen ? "bg-green-500" : "bg-red-500"
                         }`}
-                    onClick={toggleShop}
+                    onClick={() => toggleShop(selectedReason)}
                 >
                     {/* Moving Circle */}
                     <div
@@ -113,7 +120,7 @@ const ShopToggle = ({ listingId }) => {
                 )}
 
                 {/* Show Reasons if Shop is Closed */}
-                {!isOpen && (
+                {isOpen && (
                     <div className="mt-4 relative">
                         {/* Show button to select reason */}
                         {showReasons && (
@@ -133,6 +140,7 @@ const ShopToggle = ({ listingId }) => {
                                             onClick={() => {
                                                 setSelectedReason(reason);
                                                 setShowReasons(false); // Hide reason list after selection
+                                                toggleShop(reason);
                                             }}
                                         >
                                             {reason}

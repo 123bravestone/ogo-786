@@ -10,10 +10,10 @@ import ShopBox from '../components/Shopbox';
 import axios from 'axios';
 import Loader from '../components/Loader';
 import { FaSearch } from 'react-icons/fa';
-import { signInSuccess, userLocationSet } from '../app/user/userSlice.js';
+import { userLocationSet } from '../app/user/user2Slice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import SEO from '../components/SEO.jsx';
-import AddToHomeScreen from '../components/AddToHomeScreen.jsx';
+// import AddToHomeScreen from '../components/AddToHomeScreen.jsx';
 
 
 // const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -30,6 +30,7 @@ import AddToHomeScreen from '../components/AddToHomeScreen.jsx';
 // };
 
 
+
 const Home = () => {
 
   // const [distance, setDistance] = useState([]);
@@ -37,7 +38,8 @@ const Home = () => {
   // const [userLocation, setUserLocation] = useState(null);
   // const [location, setLocation] = useState(false);
   const [flag, setFlag] = useState(false);
-  const { currentUser, userLocation } = useSelector(state => state.user);
+  const { userLocation } = useSelector(state => state.user2);
+  // const { loginUser } = useSelector(state => state.user2);
   const dispatchEvent = useDispatch();
 
 
@@ -58,7 +60,9 @@ const Home = () => {
 
 
 
-
+  // useEffect(() => {
+  //   dispatchEvent(logoutSet(null));
+  // }, []);
 
 
 
@@ -82,25 +86,16 @@ const Home = () => {
 
       try {
         setLoading(true);
-        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?offer=true`).then(async (res) => {
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/get?`).then(async (res) => {
           if (res.data) {
             // setOfferListings(res.data);
             setSortedShops(res.data);
+
             setLoading(false);
           }
-          {
-            currentUser &&
-              await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/user/${currentUser._id}`).then((res) => {
-                if (res.data) {
-                  // setOfferListings(res.data);
-                  // setSortedShops(res.data);
-                  dispatchEvent(signInSuccess(res.data));
-                  // console.log("isAdmin", res.data.username);
-                  setLoading(false);
-                }
-              })
-          }
-        });
+        })
+
+        setLoading(false);
 
 
 
@@ -168,15 +163,12 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    if (userLocation === null) {
-      setTimeout(() => {
-        getUserLocation();
-      }, 2000);
-    }
-  }, []);
   // useEffect(() => {
-  //   console.log("userLocation2", userLocation);
+  //   if (userLocation === null) {
+  //     setTimeout(() => {
+  //       getUserLocation();
+  //     }, 2000);
+  //   }
   // }, []);
 
 
@@ -190,7 +182,7 @@ const Home = () => {
         ogImage="https://offlinego.in/store.avif"
         url="https://offlinego.in"
       />
-      <AddToHomeScreen />
+      {/* <AddToHomeScreen /> */}
 
 
       {/* Image Section */}
@@ -253,7 +245,7 @@ const Home = () => {
 
         {/* <ScratchCard /> */}
         {/* <DistanceCalculator /> */}
-        <Link to="/search?offer=true" className='p-3 rounded-lg text-white bg-blue-500 font-bold hover:opacity-75 m-auto flex items-center'>
+        <Link to={`/search?${userLocation ? `lat=${userLocation.lat}&lon=${userLocation.lon}` : ""}&dist=5`} className='p-3 rounded-lg text-white bg-blue-500 font-bold hover:opacity-75 m-auto flex items-center'>
           <FaSearch className='inline-block mr-2' /> Let's Find Your Next Shop...
         </Link>
 

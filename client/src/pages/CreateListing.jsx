@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import AddressSearch from "../components/AddressSearch";
 import ImageUpload from "../components/uploadImages";
 import LocationBox from "../components/LocationBox";
+import { loginSet, userListingSet } from "../app/user/user2Slice.js";
+import Loader from "../components/Loader.jsx";
 
 
 
@@ -17,14 +19,16 @@ export default function CreateListing() {
 
 
 
-    const [files, setFiles] = useState([]);
+    const dispatchEvent = useDispatch();
     const [formData, setFormData] = useState({
         imageUrls: [],
         shopname: "",
         description: "",
         address: "",
-        latitude: 0,
-        longitude: 0,
+        location: {
+            type: "Point",
+            coordinates: []
+        },
         whatsAppNo: "",
         shoptype: "",
         discountOffer: "",
@@ -40,7 +44,7 @@ export default function CreateListing() {
     const [flag, setFlag] = useState(false)
     const [loading, setLoading] = useState(false);
 
-    const { currentUser } = useSelector(state => state.user);
+    const { loginUser } = useSelector(state => state.user2);
     const navigate = useNavigate();
 
     const [shopResult, setshopResults] = useState(false);
@@ -151,6 +155,7 @@ export default function CreateListing() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log("formData");
         try {
 
             // if we don't have any image don't submit form
@@ -164,9 +169,12 @@ export default function CreateListing() {
             setError(false);
             setFlag(false)
 
-            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/create-listing`, { ...formData, userRef: currentUser._id }).then(async (res) => {
-                if (res.data) {
-                    navigate(`/listing/${res.data._id}`, { replace: true });
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/create-listing`, { ...formData, userRef: loginUser._id }).then(async (res) => {
+                if (res.data.listing) {
+                    dispatchEvent(userListingSet(res.data.listing));
+                    dispatchEvent(loginSet(res.data.user));
+                    const listID = res.data.listing;
+                    navigate(`/listing/${listID._id}`, { replace: true });
                     // console.log("working")
                 }
             });
@@ -187,8 +195,9 @@ export default function CreateListing() {
         <>
             <main className="p-3 max-w-4xl mx-auto">
                 <h1 className="text-3xl font-semibold text-center my-7">
-                    Create a Listing
+                    Open Online Shop
                 </h1>
+                {loading && <Loader />}
 
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-4 flex-1">
@@ -306,7 +315,7 @@ export default function CreateListing() {
                                         onBlur={() => setIsFocused(false)}
                                         value={formData.discountOffer}
                                         className="border p-3 border-blue-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        required
+
                                         maxLength={42}
                                         autoComplete="off"
 
@@ -443,7 +452,7 @@ export default function CreateListing() {
                             disabled={loading || uploading}
                             className={`p-3 ${loading || uploading ? "bg-blue-300" : "bg-blue-600"} text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-90`}
                         >
-                            {loading ? 'Creating...' : 'Create List'}
+                            {loading ? 'Creating...' : 'Create Shop'}
                         </button>
 
                         {error && flag && <p className="text-red-700 text-sm">{error}</p>}

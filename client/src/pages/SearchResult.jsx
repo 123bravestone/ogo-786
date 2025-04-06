@@ -23,8 +23,11 @@ const SearchResult = () => {
         shop: '',
         city: '',
         shoptype: '',
-        offer: true,
-        discountOffer: ''
+        offer: false,
+        // discountOffer: '',
+        distance: 5,
+        coordinates: [],
+
     });
     const [showFilter, setShowFilter] = useState(false);
     const [distance, setDistance] = useState([]);
@@ -32,6 +35,7 @@ const SearchResult = () => {
     const [flag, setFlag] = useState(false);
 
     const filterRef = useRef(null);
+
 
     const navigate = useNavigate();
 
@@ -79,10 +83,14 @@ const SearchResult = () => {
         const cityFromUrl = urlParams.get('city');
         const shoptypeFromUrl = urlParams.get('shoptype');
         const offerFromUrl = urlParams.get('offer');
-        const discountOfferFromUrl = urlParams.get('discountOffer');
+        // const discountOfferFromUrl = urlParams.get('discountOffer');
+        const distanceFromUrl = urlParams.get('dist');
+        const latFromUrl = urlParams.get('lat');
+        const lonFromUrl = urlParams.get('lon');
+
 
         if (shopFromUrl || cityFromUrl || shoptypeFromUrl || offerFromUrl) {
-            setSidebarData({ shop: shopFromUrl || '', city: cityFromUrl || '', shoptype: shoptypeFromUrl || '', discountOffer: discountOfferFromUrl || '', offer: offerFromUrl === "true" ? true : false });
+            setSidebarData({ shop: shopFromUrl || '', lat: latFromUrl || '', lon: lonFromUrl || '', distance: distanceFromUrl || 5, city: cityFromUrl || '', shoptype: shoptypeFromUrl || '', offer: offerFromUrl === "true" ? true : false });
         }
 
         const fetchListings = async () => {
@@ -91,9 +99,9 @@ const SearchResult = () => {
                 const searchQuery = urlParams.toString();
                 if (searchQuery) {
                     // console.log("work", searchQuery);
-                    await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?${searchQuery}`).then(async (res) => {
+                    await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/listings/get?${searchQuery}`).then(async (res) => {
                         if (res.data) {
-                            // console.log(res.data);
+                            // console.log("work");
                             setListings(res.data);
                             if (res.data.length > 8) {
                                 setShowMore(true);
@@ -126,14 +134,17 @@ const SearchResult = () => {
             const urlParams = new URLSearchParams()
             urlParams.set('shoptype', sidebarData.shoptype);
             urlParams.set('offer', sidebarData.offer);
-            urlParams.set('discountOffer', sidebarData.discountOffer);
+            // urlParams.set('discountOffer', sidebarData.discountOffer);
             urlParams.set('shop', sidebarData.shop);
             urlParams.set('city', sidebarData.city);
+            urlParams.set('dist', sidebarData.distance);
+            urlParams.set('lat', sidebarData.coordinates[0]);
+            urlParams.set('lon', sidebarData.coordinates[1]);
             const searchQuery = urlParams.toString();
             setLoading(false);
             setSidebarData((prevData) => ({
                 ...prevData,
-                discountOffer: '',
+                distance: 5,
                 shoptype: '',
             }))
             navigate(`/search?${searchQuery}`);
@@ -178,11 +189,11 @@ const SearchResult = () => {
 
                 <div className=" grid grid-cols-[1fr_4fr]  items-center gap-2 p-4">
                     <p className="text-white  bg-blue-600 cursor-pointer  rounded-[8px] flex flex-col md:flex-row items-center justify-center " onClick={() => setFlag(!flag)} ><FaFilter size={20} className="w-[40px] h-[40px] p-2" />Filter</p>
-                    <SearchSmallBar setSidebarData={setSidebarData} listings={listings && listings.length > 0 ? listings : []} setLoading={setLoading} setDistance={setDistance} />
+                    <SearchSmallBar setSidebarData={setSidebarData} setListings={setListings} listings={listings && listings.length > 0 ? listings : []} setLoading={setLoading} setDistance={setDistance} />
                 </div>
             )}
             <div className="w-full md:w-3/4 p-4">
-                {showFilter && <SearchSmallBar setSidebarData={setSidebarData} listings={listings && listings.length > 0 ? listings : []} setLoading={setLoading} setDistance={setDistance} />}
+                {showFilter && <SearchSmallBar setSidebarData={setSidebarData} setListings={setListings} listings={listings && listings.length > 0 ? listings : []} setLoading={setLoading} setDistance={setDistance} />}
                 {!showFilter && (
 
                     <div>

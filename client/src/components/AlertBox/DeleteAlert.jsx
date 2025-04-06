@@ -1,22 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userListingSet } from "../../app/user/user2Slice";
 
-const DeleteAlert = ({ shopName, listingId, onCancel, setDeletElement, setError, setUserListing, userID }) => {
+const DeleteAlert = ({ shopName, listingId, onCancel, setDeletElement, setError, userID }) => {
     const [inputValue, setInputValue] = useState("");
     const navigate = useNavigate();
+    const dispatchEvent = useDispatch()
 
 
     const handleDeleteConfirm = async (listindId) => {
         try {
             setDeletElement(true)
-            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete-list-item/${listindId}`, { _id: userID }).then(async (res) => {
-                if (res.data) {
-                    setDeletElement(false)
-                    setUserListing((prev) =>
-                        prev.filter((listing) => listing._id !== listindId)
-                    );
-                }
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/delete-list-item/${listindId}`, { _id: userID }).then(async (res) => {
+                setDeletElement(false)
+                dispatchEvent(userListingSet());
+                // setUserListing((prev) =>
+                //     prev.filter((listing) => listing._id !== listindId)
+                // );
             })
 
             navigate("/", { replace: true });

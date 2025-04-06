@@ -1,5 +1,5 @@
 import express from 'express';
-import { createListing, deleteImage, deleteListItem, deleteReview, deleteShop, expireListing, getAllReviewsRates, getAllShops, getIsOpen, getListing, openShopVerify, reviewListing, SearchListings, updateListing, uploadImages } from '../controllers/listingController.js';
+import { createListing, deleteImage, deleteListItem, deleteReview, deleteShop, getAllReviewsRates, getAllShops, getIsOpen, getListing, openShopVerify, reviewListing, SearchListings, updateListing, uploadImages } from '../controllers/listing2Controller.js';
 
 import multer from "multer";
 
@@ -19,9 +19,9 @@ router
     .delete('/delete-review/:id/:userId', deleteReview)
     .get('/shops', getAllShops)
     .delete('/delete-shop/:id', deleteShop)
-    .get('/open-shop/:id', getIsOpen)
-    .post('/open-shop/:id', openShopVerify)
-    .get('/expire-listing/:id', expireListing)
+    .get('/is-open/:id', getIsOpen)
+    .post('/open-verify/:id', openShopVerify)
+// .get('/expire-listing/:id', expireListing)
 
 
 

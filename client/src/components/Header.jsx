@@ -12,7 +12,8 @@ import { BiSolidDetail } from 'react-icons/bi';
 
 export default function Header() {
 
-    const { currentUser } = useSelector((state) => state.user)
+    // const { currentUser } = useSelector((state) => state.user)
+    const { loginUser } = useSelector((state) => state.user2)
     const [isOpen, setIsOpen] = useState(false);
 
     // Function to toggle the sidebar
@@ -69,22 +70,22 @@ export default function Header() {
                     <Link to="/"><li>
                         Home
                     </li></Link>
-                    <Link to="/price-user"><li >
+                    {/* <Link to="/price-user"><li >
                         Pricing
-                    </li></Link>
+                    </li></Link> */}
                     <Link to="/"><li> About</li></Link>
                     {/* 
                     {currentUser && currentUser.isAdmin && <Link to="/learn-earn"><li > Learn</li></Link>} */}
 
-                    <Link to={`${currentUser && currentUser.isAdmin ? "/learn-earn" : "/price-user"} `}><li > Learn</li></Link>
+                    <Link to={`${loginUser && loginUser.isAdmin ? "/learn-earn" : "/price-user"} `}><li > Learn</li></Link>
                     <Link to="/user-coupons"><li > Coupens</li></Link>
 
 
                     <Link to='/profile'>
-                        {currentUser && currentUser._id ? (
+                        {loginUser && loginUser._id ? (
 
 
-                            currentUser.imageUrl ? <img className='rounded-full border-2 border-white h-8 w-8 object-cover' src={currentUser.imageUrl} alt='Profile image' loading='lazy' /> : (<img className='rounded-full  border-2 border-white h-8 w-8 object-cover' src={UserProfile} alt='Profile image' loading='lazy' />)
+                            loginUser.imageUrl ? <img className='rounded-full border-2 border-white h-8 w-8 object-cover' src={loginUser.imageUrl} alt='Profile image' loading='lazy' /> : (<img className='rounded-full  border-2 border-white h-8 w-8 object-cover' src={UserProfile} alt='Profile image' loading='lazy' />)
                         ) : (<li >Sign In</li>)}
                     </Link>
                 </ul>
@@ -115,25 +116,25 @@ export default function Header() {
                         <ul>
 
                             <li><a href="/" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><IoMdHome />Home</a></li>
-                            <li><a href="/price-user" onClick={closeSidebar} className="hover:text-gray-400  border-b-2 border-white py-2 flex items-center gap-2"><IoPricetags />Pricing</a></li>
+                            {/* <li><a href="/price-user" onClick={closeSidebar} className="hover:text-gray-400  border-b-2 border-white py-2 flex items-center gap-2"><IoPricetags />Pricing</a></li> */}
                             <li><a href="/" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2 "><BiSolidDetail />About</a></li>
                             {/* {currentUser && currentUser.isAdmin && <li><a href="/learn-earn" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><FaBookOpen />Learn</a></li>} */}
-                            <li><a href={`${currentUser && currentUser.isAdmin ? "/learn-earn" : "/price-user"}`} onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><FaBookOpen />Learn</a></li>
+                            <li><a href={`${loginUser && loginUser.isAdmin ? "/learn-earn" : "/price-user"}`} onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><FaBookOpen />Learn</a></li>
 
                             <li><a href="/user-coupons" onClick={closeSidebar} className="hover:text-gray-400 border-b-2 border-white py-2 flex items-center gap-2"><IoTicket />Coupens</a></li>
 
                             <li><a href="/profile" onClick={closeSidebar} className="hover:text-gray-400">
-                                {currentUser ? (
+                                {loginUser ? (
 
 
                                     <div className='flex items-center gap-2 bg-blue-600 px-3 py-2 rounded '>
                                         {
-                                            currentUser.imageUrl ? <img className='rounded-full border-2 border-white h-8 w-8 object-cover' src={currentUser.imageUrl} alt='Profile image' loading='lazy' /> : (<img className='rounded-full  border-2 border-white h-8 w-8 object-cover' src={UserProfile} alt='Profile image' loading='lazy' />)
+                                            loginUser.imageUrl ? <img className='rounded-full border-2 border-white h-8 w-8 object-cover' src={loginUser.imageUrl} alt='Profile image' loading='lazy' /> : (<img className='rounded-full  border-2 border-white h-8 w-8 object-cover' src={UserProfile} alt='Profile image' loading='lazy' />)
                                         }
                                         <p>Profile</p>
 
                                     </div>
-                                ) : (<li className='flex items-center border-b-2 border-white py-3 gap-2' ><FaSignInAlt />Sign In</li>)}</a></li>
+                                ) : (<span className='flex items-center border-b-2 border-white py-3 gap-2' ><FaSignInAlt />Sign In</span>)}</a></li>
                         </ul>
                     </nav>
                 </menu>

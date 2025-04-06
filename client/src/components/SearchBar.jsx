@@ -25,13 +25,6 @@ const getDistance = (lat1, lon1, lat2, lon2) => {
 export default function SearchBar({ sortedShops, setSortedShops, getUserLocation, flag }) {
 
 
-
-
-    // const [userLocation, setUserLocation] = useState(null);
-    // const [sortedShops, setSortedShops] = useState(offerListings);
-
-    // const [flag, setFlag] = useState(false);
-
     const navigate = useNavigate();
 
     const [city, setCity] = useState("");
@@ -39,7 +32,7 @@ export default function SearchBar({ sortedShops, setSortedShops, getUserLocation
     const [citySuggestions, setCitySuggestions] = useState(false);
     const [shopSuggestions, setShopSuggestions] = useState(false);
 
-    const { userLocation } = useSelector((state) => state.user);
+    const { userLocation } = useSelector((state) => state.user2);
     const handleSearchSubmit = (e) => {
         e.preventDefault();
 
@@ -57,14 +50,16 @@ export default function SearchBar({ sortedShops, setSortedShops, getUserLocation
 
     }
 
-
+    // useEffect(() => {
+    //     console.log("sortedShops", sortedShops);
+    // }, []);
 
     const filteredCities = cities
         .filter((item) => item.toLowerCase().includes(city.toLowerCase()))
         .sort();
 
 
-    const filteredShops2 = sortedShops
+    const filteredShops = sortedShops
         .filter((item) => item.shopname.toLowerCase().includes(shop.toLowerCase()))
         .sort();
 
@@ -83,8 +78,8 @@ export default function SearchBar({ sortedShops, setSortedShops, getUserLocation
     useEffect(() => {
         if (userLocation) {
             const sorted = [...sortedShops].sort((a, b) => {
-                const distanceA = getDistance(userLocation.lat, userLocation.lon, a.latitude, a.longitude);
-                const distanceB = getDistance(userLocation.lat, userLocation.lon, b.latitude, b.longitude);
+                const distanceA = getDistance(userLocation.lat, userLocation.lon, a.location.coordinates[1], a.location.coordinates[0]);
+                const distanceB = getDistance(userLocation.lat, userLocation.lon, b.location.coordinates[1], b.location.coordinates[0]);
                 return distanceA - distanceB;
             });
             setSortedShops(sorted);
@@ -151,9 +146,9 @@ export default function SearchBar({ sortedShops, setSortedShops, getUserLocation
                             className="bg-transparent focus:outline-none text-[12px] sm:text-[18px] pl-10 lg:w-[35rem] md:w-[20rem] w-[10rem]"
 
                         />
-                        {shopSuggestions && filteredShops2.length > 0 && (
+                        {shopSuggestions && filteredShops.length > 0 && (
                             <div className=" absolute z-10 top-[80%]   mt-2 w-full bg-white max-h-40 overflow-y-auto shadow-lg rounded-lg ">
-                                {filteredShops2.map((listing, idx) => (
+                                {filteredShops.map((listing, idx) => (
                                     <p key={idx} onClick={() => {
                                         setShop(listing.shopname);
                                         setShopSuggestions(false);

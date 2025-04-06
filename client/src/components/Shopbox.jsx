@@ -1,6 +1,6 @@
 
 import { use, useEffect, useState } from "react";
-import { FaArrowRightLong, FaLocationDot, FaMapPin, FaShop } from "react-icons/fa6";
+import { FaArrowRightLong, FaClock, FaLocationDot, FaMapPin, FaShop } from "react-icons/fa6";
 import { BiSolidDiscount } from "react-icons/bi";
 
 import WhatsAppButton from "./whatsappLoc";
@@ -23,12 +23,8 @@ const getDistance = (lat1, lon1, lat2, lon2) => {
 const ShopBox = ({ listing }) => {
 
     const [flag, setFlag] = useState(false);
-    const { userLocation } = useSelector((state) => state.user);
-    // const images = [
-    //     "https://cdn.pixabay.com/photo/2024/05/02/01/36/landscape-8733466_1280.png",
-    //     "https://static.vecteezy.com/system/resources/thumbnails/006/434/818/small/nature-forest-scene-with-rainbow-in-the-sky-free-vector.jpg",
-    //     "https://img.freepik.com/free-vector/blank-meadow-landscape-scene-sunset-time_1308-62586.jpg?semt=ais_hybrid"
-    // ];
+    const { userLocation } = useSelector((state) => state.user2);
+
     const [currentImage, setCurrentImage] = useState(0);
 
     const nextImage = () => {
@@ -39,6 +35,7 @@ const ShopBox = ({ listing }) => {
     };
 
     useEffect(() => {
+        // console.log("flag", listing.coordinates)
         if (flag) {
             setFlag(false);
             setCurrentImage(0);
@@ -89,7 +86,7 @@ const ShopBox = ({ listing }) => {
                 </div>
                 <div className="flex flex-row justify-between gap-2 my-2">
                     <p className="text-sm font-semibold flex items-center gap-2 text-gray-600"> <FaLocationDot size={20} color="blue" /> {listing.address}</p>
-                    <p className="text-sm font-semibold text-gray-600 flex items-start gap-1"><FaMapPin size={20} color="blue" /> {userLocation && getDistance(userLocation.lat, userLocation.lon, listing.latitude, listing.longitude).toFixed(2)}km</p>
+                    <p className="text-sm font-semibold text-gray-600 flex items-start gap-1"><FaMapPin size={20} color="blue" /> {userLocation && getDistance(userLocation.lat, userLocation.lon, listing.location.coordinates[1], listing.location.coordinates[0]).toFixed(2)}km <span>{userLocation && listing.location.coordinates[0] > userLocation.lon ? "east" : "west"}</span></p>
                 </div >
                 <div className="flex flex-row justify-between gap-2 ">
 
@@ -99,18 +96,20 @@ const ShopBox = ({ listing }) => {
 
                 </div>
                 {listing.isOpen ? (
-                    <p className="mt-2 text-green-600 font-semibold  ">🕒 Open till{" "}{listing.closeTime} {listing.ctime}</p>
+                    <p className="mt-2 flex items-center gap-2 text-green-600 font-semibold  "><FaClock size={20} color="blue" /> Open: {" "}{listing.openTime} {listing.otime} - {listing.closeTime} {listing.ctime}</p>
                 ) : (
-                    <p className="mt-2 text-red-600 font-semibold  ">🕒 Closed </p>
+                    <p className="mt-2 text-red-600 font-semibold  "><FaClock size={20} color="red" /> Closed </p>
                 )}
                 <div className="flex justify-end items-start h-full">
                     <WhatsAppButton listingID={listing._id} phoneNumber={listing.whatsAppNo} latitude={listing.latitude} longitude={listing.longitude} home={true} />
                 </div>
-                <div className="flex mt-2">
-                    <p
+                {listing.offer && (
+                    <div className="flex mt-2">
+                        <p
 
-                        className="bg-blue-500  text-white px-2 py-1 rounded-lg text-[16px] md:text-[14px] font-semibold flex items-center gap-2"><BiSolidDiscount size={30} />{listing.discountOffer}</p>
-                </div>
+                            className="bg-blue-500  text-white px-2 py-1 rounded-lg text-[16px] md:text-[14px] font-semibold flex items-center gap-2"><BiSolidDiscount size={30} />{listing.discountOffer}</p>
+                    </div>
+                )}
             </div>
         </div>
     );

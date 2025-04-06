@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 // const { Schema } = mongoose;
 const userSchema = new mongoose.Schema({
+
   username: {
     type: String,
     default: "",
@@ -18,10 +19,11 @@ const userSchema = new mongoose.Schema({
   // },
   mobileNum: {
     type: Number,
-    required: false,
-    // unique: true,
+    required: true,
+    unique: true,
+
   },
-  otpCode: {
+  otp: {
     type: Number,
     required: false,
   },
@@ -41,22 +43,22 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  userLocation: {
-    type: String,
-    default: "",
-  },
   shopsId: {
     type: Array,
     default: [],
   },
-  expireDate: {
-    type: Boolean,
-    default: false,
-  },
-  success: {
-    type: Boolean,
-    default: false,
-  },
+  // userLocation: {
+  //   type: String,
+  //   default: "",
+  // },
+  // expireDate: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // success: {
+  //   type: Boolean,
+  //   default: false,
+  // },
   imageUrl: {
     type: String,
     default: ""

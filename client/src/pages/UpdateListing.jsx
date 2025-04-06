@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-// import AddressSearch from "../components/AddressSearch";
 import ImageUpload from "../components/uploadImages";
 import Loader from "../components/Loader";
-// import LocationBox from "../components/LocationBox";
+import LocationBox from "../components/LocationBox";
 
 
 
@@ -25,8 +24,10 @@ export default function UpdateListing() {
         shopname: "",
         description: "",
         address: "",
-        latitude: 0,
-        longitude: 0,
+        location: {
+            type: "Point",
+            coordinates: []
+        },
         whatsAppNo: "",
         shoptype: "",
         discountOffer: "",
@@ -34,10 +35,7 @@ export default function UpdateListing() {
         openTime: 9,
         ctime: "PM",
         otime: "AM",
-        // type: "sale",
         offer: true,
-        // furnished: false,
-        // parking: false,
         userRef: ""
     });
     const [imageUploadError, setImageUploadError] = useState(false);
@@ -47,16 +45,12 @@ export default function UpdateListing() {
 
     const [loading, setLoading] = useState(false);
     const [filePercent, setFilePercent] = useState(0);
-    const { currentUser } = useSelector(state => state.user);
+    const { loginUser } = useSelector(state => state.user2);
     const navigate = useNavigate();
     const params = useParams();
-
-    // const [searchTerm, setSearchTerm] = useState("");
-    // const [showResults, setShowResults] = useState(false);
     const [shopResult, setshopResults] = useState(false);
     const [discountResult, setdiscountResults] = useState(false);
 
-    // const [phone, setPhone] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
     const filteredShopTypes = shopTypes
@@ -77,33 +71,17 @@ export default function UpdateListing() {
                     setFormData(res.data);
                 }
             })
-            // const res = await fetch(`/api/listing/get/${listingId}`)
-            // const data = await res.json();
-
-            // if (data.success === false) {
-            //     console.log(data.message);
-            //     return;
-            // }
-            // setFormData(data);
         };
 
         fetchListing();
 
     }, []);
-    // useEffect(() => {
-
-    //     // console.log("work", formData.description)
-    //     // console.log("work", formData.whatsAppNo)
-    //     console.log("work", formData.whatsAppNo > 8)
-
-    // }, [formData]);
 
 
 
     const handleChange = (e) => {
 
 
-        // console.log("working", formData.imageUrls);
         // Handle input change
 
         if (e.target.id === 'shoptype') {
@@ -198,26 +176,11 @@ export default function UpdateListing() {
             setError(false);
             setFlag(false)
 
-            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listing/update-listing/${params.listingId}`, { ...formData, userRef: currentUser._id }).then(async (res) => {
+            await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/update-listing/${params.listingId}`, { ...formData, userRef: loginUser._id }).then(async (res) => {
                 if (res.data) {
                     navigate(`/listing/${res.data._id}`, { replace: true });
                 }
             })
-            // const res = await fetch(`/api/listing/update/${params.listingId}`, {
-            //     method: 'POST',
-            //     headers: {
-            //         "Content-Type": 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         ...formData,
-            //         userRef: currentUser._id,
-            //     }),
-            // });
-
-            // const data = await res.json();
-            // if (data.success === false) {
-            //     setError(data.message);
-            // }
             setLoading(false);
 
             // navigate(`/listing/${data._id}`)
@@ -236,10 +199,11 @@ export default function UpdateListing() {
     return (
         <>
             <main className="p-3 max-w-4xl mx-auto">
-                {loading && <Loader />}
                 <h1 className="text-3xl font-semibold text-center my-7">
-                    Create a Listing
+                    Update Your Shop
                 </h1>
+                {loading && <Loader />}
+
 
                 <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                     <div className="flex flex-col gap-4 flex-1">
@@ -491,8 +455,8 @@ export default function UpdateListing() {
                     </div>
                     <div className="flex flex-col flex-1 gap-4">
                         {/* <AddressSearch setFormData={setFormData} formData={formData} /> */}
-                        {/* <LocationBox setFormData={setFormData} formData={formData} /> */}
-                        <p className="font-semibold text-gray-600 text-[16px] border-2 border-dashed rounded-[20px] p-4  ">{formData.address}</p>
+                        <LocationBox setFormData={setFormData} formData={formData} />
+                        {/* <p className="font-semibold text-gray-600 text-[16px] border-2 border-dashed rounded-[20px] p-4  ">{formData.address}</p> */}
                         <ImageUpload setUploading={setUploading} setFormData={setFormData} formData={formData} />
 
                         {/* <p className="font-semibold">
