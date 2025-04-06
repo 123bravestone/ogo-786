@@ -38,6 +38,8 @@ const ReviewPage = () => {
         e.preventDefault();
         if (userReview) return;
 
+        if (!loginUser) return setError("Please login to submit a review");
+
         try {
             const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/listings/review-rate/${params.listingId}`, {
                 userId: loginUser._id,
@@ -52,7 +54,7 @@ const ReviewPage = () => {
 
 
         } catch (err) {
-            setError(err.response?.data?.message || "Error submitting review");
+            setError(err.response?.data?.message || "Already submitting review");
         }
     };
 
@@ -73,7 +75,7 @@ const ReviewPage = () => {
         <div className="max-w-lg mt-4 mx-auto p-4 bg-white shadow-md rounded">
 
             <h2 className="text-xl font-bold mb-4">User Reviews</h2>
-            <p className="mb-2 text-2xl">Hi, {loginUser.username}</p>
+            {loginUser && <p className="mb-2 text-2xl">Hi, {loginUser.username}</p>}
 
             {error && <p className="text-red-500">{error}</p>}
 
@@ -129,7 +131,7 @@ const ReviewPage = () => {
 
                         <p>{r.reviewText}</p>
                     </div>
-                    {
+                    {loginUser &&
                         r.userId === loginUser._id && (
                             <button type="button" className="text-black cursor-pointer mt-1 bg-red-200 hover:bg-red-500 p-1 rounded-[8px] " onClick={handleDelete}>
                                 Delete

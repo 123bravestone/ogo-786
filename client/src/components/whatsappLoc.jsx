@@ -1,21 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaMapMarkerAlt, FaRegCommentDots, FaWhatsapp } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const WhatsAppButton = ({ listingID, phoneNumber, latitude, longitude, home }) => {
 
     const [showIconOnly, setShowIconOnly] = useState(false);
+    const { loginUser } = useSelector((state) => state.user2);
     const buttonRef = useRef(null);
     // const phoneNumber = "+917667650665"; // Replace with actual phone number
     const message = "Hello! I would like to inquire about your services."; // Default message
 
     const openWhatsApp = () => {
+        if (!loginUser) {
+            return navigate('/auth-user');
+        }
         const numberW = '+91' + phoneNumber;
         const url = `https://wa.me/${numberW}?text=${encodeURIComponent(message)}`;
         window.open(url, "_blank");
     };
 
     const openGoogleMaps = () => {
+        if (!loginUser) {
+            return navigate('/auth-user');
+        }
         if (!latitude || !longitude) {
             alert("Location coordinates are missing!");
             return;

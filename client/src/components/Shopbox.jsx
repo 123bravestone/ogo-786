@@ -98,7 +98,7 @@ const ShopBox = ({ listing }) => {
                 {listing.isOpen ? (
                     <p className="mt-2 flex items-center gap-2 text-green-600 font-semibold  "><FaClock size={20} color="blue" /> Open: {" "}{listing.openTime} {listing.otime} - {listing.closeTime} {listing.ctime}</p>
                 ) : (
-                    <p className="mt-2 text-red-600 font-semibold  "><FaClock size={20} color="red" /> Closed </p>
+                    <p className="mt-2 flex items-center gap-2 text-red-600 font-semibold  "><FaClock size={20} color="red" /> Closed </p>
                 )}
                 <div className="flex justify-end items-start h-full">
                     <WhatsAppButton listingID={listing._id} phoneNumber={listing.whatsAppNo} latitude={listing.latitude} longitude={listing.longitude} home={true} />
